@@ -21,9 +21,11 @@ public class Node extends JPanel
 
 	public void paint(Graphics g)
 	{
+        System.out.println("print node's point");
         //Draw node point
 		g.fillOval(X - 5, Y - 5, 10, 10);
         //Draw node ID
+        System.out.println("print node's ID");
 		g.drawString(Integer.toString(ID), X + 5, Y + 5);
 	}
     

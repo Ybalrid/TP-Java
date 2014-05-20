@@ -9,12 +9,12 @@ import javax.swing.JPanel;
 public class GUI extends JFrame implements MouseListener
 {
     ArrayList<Node> NodeList = new ArrayList<Node>();
-    ArrayList<Integer> usedID = new ArrayList<Integer>();
-    
+    //ArrayList<Integer> usedID = new ArrayList<Integer>();
+
     int ID = 0;	
-    
-    Node linkOrigin = null;
-    Node linkDest = null;
+
+    private Node linkOrigin = null;
+    private Node linkDest = null;
 
     public GUI()
     {
@@ -32,7 +32,6 @@ public class GUI extends JFrame implements MouseListener
     {
         //clear the whole panel 
         g.clearRect(0, 0, this.getWidth(), this.getHeight());
-
         //draw each node
         for (Node nodeIterator : NodeList)
         {
@@ -50,7 +49,7 @@ public class GUI extends JFrame implements MouseListener
     {
         //drop if there is no node on the editor
         if(NodeList.isEmpty()) return null;
-        
+
         System.out.println("Get colsest node from " + x + "x" + y);
 
         double distance = 0;
@@ -61,11 +60,11 @@ public class GUI extends JFrame implements MouseListener
         for(Node myNode : NodeList)
         {
             System.out.println("getting distace for node " + myNode.getID());
-            
+
             //calculate distance
             distance = getDistance(myNode,x,y);
             System.out.println("distance : " + distance);
-            
+
             if(distance < reference)
             {
                 System.out.println("New closest is now : " +  myNode.getID());
@@ -91,21 +90,8 @@ public class GUI extends JFrame implements MouseListener
 
         if(e.getButton() == 1)
         {
-            if(usedID.isEmpty())
-            {
-                Node last = new Node(x,y,ID);
-                NodeList.add(last);
-                repaint();
-                ID++;
-            }
-
-            else
-            {
-                Node last = new Node(x,y,usedID.get(0));
-                NodeList.add(last);
-                usedID.remove(0);
-                repaint();
-            }
+            NodeList.add(new Node(x,y,ID++));
+            repaint();
         }
 
         if(e.getButton() == 3)
@@ -133,18 +119,18 @@ public class GUI extends JFrame implements MouseListener
             int y = e.getY();
 
             System.out.println("Pos : " + x + "x" + y);
-            
+
             linkDest = getClosest(x,y);
-            
+
             if(linkDest != null)
                 System.out.println("Dest found : " +  linkDest.x() +  "x" +  linkDest.y());
-            
+
             if(linkOrigin != null && linkDest != null)
                 if(linkOrigin != linkDest)
-                    {
-                        linkOrigin.addLink(linkDest);
-                        repaint();
-                    }
+                {
+                    linkOrigin.addLink(linkDest);
+                    repaint();
+                }
         }
     }
 
@@ -154,14 +140,14 @@ public class GUI extends JFrame implements MouseListener
         if(e.getButton() == 1)
         {
             System.out.println("Button 1");
-            
+
             int x = e.getX();
             int y = e.getY();
-            
+
             System.out.println("Pos : " + x + "x" + y);
-            
+
             linkOrigin = getClosest(x,y);
-            
+
             if(linkOrigin != null)
                 System.out.println("Origin found : " +  linkOrigin.x() +  "x" +  linkOrigin.y());
 
