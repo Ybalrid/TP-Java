@@ -29,28 +29,34 @@ public class GUI extends JFrame implements MouseListener
 
 	public void paint(Graphics g)
 	{
+        //clear the whole panel 
 		g.clearRect(0, 0, this.getWidth(), this.getHeight());
-		for (Node myNode : NodeList)
-		{
+        
+        //draw each node
+        for (Node myNode : NodeList)
+        {
 			myNode.paint(g);
 		}
 	}
 
 	public Node getClosest(int x, int y)
 	{
+        //drop if there is no node on the editor
+		if(NodeList.isEmpty()) return null;
+        
 		double distance = 0;
-		double reference = 1000;
+		double reference = Math.sqrt(
+                this.getWidth() * this.getWidth() 
+                + this.getHeight() * this.getHeight());
 		Node closest = null;
 		
-		if(NodeList.isEmpty())
-		{
-			return null;
-		}	
-	
+        //for each Node in NodeList
 		for(Node myNode : NodeList)
 		{
-			distance = Math.sqrt(x*x +y*y);
+            //calculate distance
+			distance = Math.sqrt(x*x + y*y);
 			
+            //if distance < reference 
 			if(distance < reference)
 			{
 				closest = myNode;
@@ -63,17 +69,15 @@ public class GUI extends JFrame implements MouseListener
 
 	public double getDistance(Node target, int x, int y)
 	{
-		double distance = 0;
-		
-		distance = Math.sqrt((target.X-x)*(target.X-x) + (target.Y-y)*(target.Y-y));
-
-		return distance;
+        return Math.sqrt((target.X-x)*(target.X-x) + (target.Y-y)*(target.Y-y));
 	}
 
 	/*public boolean canCreate(int x, int y)
 	{
 		if
 	}*/
+
+    // ----------------------- MOUSE LISTENER -------------------------------
 
 	public void mouseClicked(MouseEvent e)
 	{

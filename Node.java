@@ -16,13 +16,19 @@ public class Node extends JPanel
 	{
 		this.X = X;
 		this.Y = Y;
-		this.ID =ID;
+		this.ID = ID;
 	}
 
 	public void paint(Graphics g)
 	{
+        //Draw node point
 		g.fillOval(X - 5, Y - 5, 10, 10);
+        //Draw node ID
 		g.drawString(Integer.toString(ID), X + 5, Y + 5);
 	}
 
+    public ArrayList<Link> getLinks()
+    {
+        return linkList;
+    }
 }
