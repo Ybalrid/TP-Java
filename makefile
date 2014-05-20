@@ -4,4 +4,4 @@ all:
 .PHONY: clean
 
 clean:
-	rm *.class > /dev/null
+	rm *.class 2> /dev/null
