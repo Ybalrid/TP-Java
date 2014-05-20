@@ -1,6 +1,5 @@
 all:
-	javac Graph.java
-
+	javac *.java
 .PHONY: clean
 
 clean:

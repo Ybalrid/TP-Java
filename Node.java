@@ -26,9 +26,30 @@ public class Node extends JPanel
         //Draw node ID
 		g.drawString(Integer.toString(ID), X + 5, Y + 5);
 	}
+    
+    public void addLink(Node dest)
+    {
+        System.out.println("adding link");
+        LinkList.add(new Link (this, dest));
+    }
 
     public ArrayList<Link> getLinks()
     {
-        return linkList;
+        return LinkList;
+    }
+
+    public int getID()
+    {
+        return ID;
+    }
+    
+    public int x()
+    {
+        return X;
+    }
+
+    public int y()
+    {
+        return Y;
     }
 }
