@@ -54,4 +54,14 @@ public class Node extends JPanel
     {
         return Y;
     }
+
+	public void setY(int y)
+	{
+		Y = y;
+	}
+
+	public void setX(int x)
+	{
+		X = x;
+	}
 }
