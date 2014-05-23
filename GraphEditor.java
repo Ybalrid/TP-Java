@@ -25,10 +25,13 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
     
     //Set if the next user drawn Link will be An oriented one. false by default.
     private boolean orientedMode = false;
-
+    
+    private boolean draggNode = false;
+    private Node draggedNode = null;
     public GraphEditor()
     {
         addMouseListener(this);
+        addMouseMotionListener(this);
         f = new Font("Helvetica", Font.BOLD, 12);
         setVisible(true);
     }
@@ -183,11 +186,17 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
             if(linkOrigin != null && linkDest != null)
                 if(linkOrigin != linkDest)
                 {
-                    //Non-oriented.
                     linkOrigin.addLink(linkDest);
-                    linkDest.addLink(linkOrigin);
+                    if(!orientedMode)
+                        linkDest.addLink(linkOrigin); //Add the reverse link.
                     repaint();
                 }
+        }
+        if(e.getButton() == 2)
+        {
+            draggNode = false;
+            draggedNode = null;
+
         }
     }
 
@@ -211,16 +220,17 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
             linkDest = null;
         }
-
+        
         if(e.getButton() == 2)
         {
+            System.out.println("Middle click button");
+            System.out.println("Dragged on " + x + "x" + y); 
             Node closestNode = getClosest(x,y);
 
             if(getDistance(closestNode, x, y) <= 10)
             {
-                closestNode.setX(x);
-                closestNode.setY(y);
-                repaint();
+                draggedNode = closestNode;
+                draggNode = true;
             }
         }
 
@@ -228,10 +238,27 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
     public void mouseDragged(MouseEvent e)
     {
+        int x = e.getX();
+        int y = e.getY();
+        
+        System.out.println("mouseDragged");
+        
+        if(draggedNode != null)
+            if(draggNode)
+            {
+                draggedNode.setX(x);
+                draggedNode.setY(y);
+                repaint();
+            }
+
     }
 
     public void mouseMoved(MouseEvent e)
     {
+        System.out.println("mouseMoved");
+        int x = e.getX();
+        int y = e.getY();
+       
     }
 
 }
