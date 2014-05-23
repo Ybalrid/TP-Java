@@ -76,7 +76,15 @@ public class GUI extends JFrame
 		menuBar.add(help);
 		setJMenuBar(menuBar);
 		setCursor(algoCurs);
-
+        
+		this.addComponentListener(new ComponentAdapter() 
+		{
+            public void componentResized(ComponentEvent e) 
+			{             
+                graph.repaint();
+				System.out.println("HIIII");
+            }
+        });
 		quit_.addActionListener(new ActionListener()
 		{
       		public void actionPerformed(ActionEvent arg0) 

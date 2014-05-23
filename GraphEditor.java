@@ -22,10 +22,12 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
     private Node linkDest = null;
     
     private FileManager Fm = new FileManager();
+	private boolean pressed = false;
 	
 	public GraphEditor()
 	{
 		addMouseListener(this);
+		addMouseMotionListener(this);
 		f = new Font("Helvetica", Font.BOLD, 12);
 		setVisible(true);
 	}
@@ -157,6 +159,9 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
     public void mouseReleased(MouseEvent e)
     { 
+		if(e.getButton() == 2)
+			pressed = false;
+
         System.out.println("Released");
         if(e.getButton() == 1)
         {
@@ -186,6 +191,9 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
     {
 		int x = e.getX();
         int y = e.getY();
+		
+		if(e.getButton() == 2)
+			pressed = true;
 
         System.out.println("Pressed");
         if(e.getButton() == 1)
@@ -202,27 +210,48 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
             linkDest = null;
         }
+    }
+
+	public void mouseDragged(MouseEvent e)
+	{
+		/*int x = e.getX();
+        int y = e.getY();	
 
 		if(e.getButton() == 2)
         {
 			Node closestNode = getClosest(x,y);
 			
-			if(getDistance(closestNode, x, y) <= 10)
+			if(closestNode != null)
 			{
-				closestNode.setX(x);
-				closestNode.setY(y);
-				repaint();
+				if(getDistance(closestNode, x, y) <= 10)
+				{
+					closestNode.setX(x);
+					closestNode.setY(y);
+					repaint();
+				}
 			}
-        }
-
-    }
-
-	public void mouseDragged(MouseEvent e)
-	{
+        }*/
 	}
 
 	public void mouseMoved(MouseEvent e)
 	{
+		/*int x = e.getX();
+        int y = e.getY();	
+
+		if(e.getButton() == 2)
+        {
+			Node closestNode = getClosest(x,y);
+			
+			if(closestNode != null)
+			{
+				if(getDistance(closestNode, x, y) <= 10)
+				{
+					closestNode.setX(x);
+					closestNode.setY(y);
+					repaint();
+				}
+			}
+        }*/
 	}
 
 }
