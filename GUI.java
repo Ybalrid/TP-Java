@@ -6,22 +6,52 @@ import java.lang.Math;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import java.io.*;
+
+
+
 public class GUI extends JFrame implements MouseListener
 {
-    ArrayList<Node> NodeList = new ArrayList<Node>();
 
-    int ID = 0;	
+    //Atributes for GUI
+    Font f;
+    
+    JMenuBar menuBar = new JMenuBar();
+    JMenu file = new JMenu("File");
+
+    JMenuItem new_ = new JMenuItem("New");
+    JMenuItem open_ = new JMenuItem("Open");
+    JMenuItem save_ = new JMenuItem("Save");
+    JMenuItem save_as_ = new JMenuItem("Save as...");
+    JMenuItem quit_ = new JMenuItem("Quit");
+
+    private ArrayList<Node> NodeList = new ArrayList<Node>();
+
+    private int ID = 0;	
 
     private Node linkOrigin = null;
     private Node linkDest = null;
     
-    Font f;
     
     public GUI()
     {
-        setTitle("GraphESIEA");
+        setTitle("Graph Editor");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setSize(800, 450);
+
+        file.add(new_);
+        file.add(open_);
+        file.addSeparator();
+        file.add(save_);
+        file.add(save_as_);
+        file.addSeparator();
+        file.add(quit_);
+
+        menuBar.add(file);
+
+        setJMenuBar(menuBar);
+
         setVisible(true);
 
         JPanel panel = new JPanel();
@@ -34,7 +64,7 @@ public class GUI extends JFrame implements MouseListener
     {
         g.setFont(f);
         //clear the whole panel 
-        g.clearRect(0, 0, this.getWidth(), this.getHeight());
+        g.clearRect(0, 30, this.getWidth(), this.getHeight());
         //draw each node
         for (Node nodeIterator : NodeList)
         {
