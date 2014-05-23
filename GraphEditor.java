@@ -71,7 +71,7 @@ public class GraphEditor extends JPanel implements MouseListener
         //for each Node in NodeList
         for(Node myNode : NodeList)
         {
-            System.out.println("getting distace for node " + myNode.getID());
+            System.out.println("getting distance for node " + myNode.getID());
 
             //calculate distance
             distance = getDistance(myNode,x,y);
@@ -135,13 +135,8 @@ public class GraphEditor extends JPanel implements MouseListener
 
 		if(e.getButton() == 2)
 		{
-		
+			
 		}
-
-        if(e.getButton() == 3)
-        {
-
-        }
 
     }
 
@@ -182,14 +177,15 @@ public class GraphEditor extends JPanel implements MouseListener
 
     public void mousePressed(MouseEvent e)
     {
+		int x = e.getX();
+        int y = e.getY();
+
         System.out.println("Pressed");
         if(e.getButton() == 1)
         {
             System.out.println("Button 1");
 
-            int x = e.getX();
-            int y = e.getY();
-
+            
             System.out.println("Pos : " + x + "x" + y);
 
             linkOrigin = getClosest(x,y);
@@ -198,6 +194,18 @@ public class GraphEditor extends JPanel implements MouseListener
                 System.out.println("Origin found : " +  linkOrigin.x() +  "x" +  linkOrigin.y());
 
             linkDest = null;
+        }
+
+		if(e.getButton() == 2)
+        {
+			Node closestNode = getClosest(x,y);
+			
+			if(getDistance(closestNode, x, y) <= 10)
+			{
+				closestNode.setX(x);
+				closestNode.setY(y);
+				repaint();
+			}
         }
 
     }
