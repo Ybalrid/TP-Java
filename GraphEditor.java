@@ -57,7 +57,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         g2.setFont(f);
 
         //Clear the whole panel 
-        g2.clearRect(0, 30, this.getWidth(), this.getHeight());
+        g2.clearRect(0, 0, this.getWidth(), this.getHeight());
         //Draw each node
         for (Node nodeIterator : NodeList)
         {
@@ -78,6 +78,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         while(!NodeList.isEmpty())
             NodeList.remove(0);
         repaint();
+        ID = 0;
     }
 
     public Node getClosest(int x, int y)
@@ -143,7 +144,8 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
                         }
                     }
                     NodeList.remove(closestNode);
-                    reIndex(); //only moment it's usefull.@
+                    reIndex(); //only moment it's usefull
+                    ID = NodeList.size();
                     repaint();
                     return;
                 }
