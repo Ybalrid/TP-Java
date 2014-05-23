@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
@@ -98,7 +99,9 @@ public class GUI extends JFrame
     }
 
 	 public void paint(Graphics g)
-    {
-		graph.paint(g);
-	}
+     {
+
+         Graphics2D g2 =(Graphics2D) g;
+         graph.paint(g2);
+     }
 }

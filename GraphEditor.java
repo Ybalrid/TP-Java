@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
@@ -20,15 +21,15 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
     private Node linkOrigin = null;
     private Node linkDest = null;
-    
+
     private FileManager Fm = new FileManager();
-	
-	public GraphEditor()
-	{
-		addMouseListener(this);
-		f = new Font("Helvetica", Font.BOLD, 12);
-		setVisible(true);
-	}
+
+    public GraphEditor()
+    {
+        addMouseListener(this);
+        f = new Font("Helvetica", Font.BOLD, 12);
+        setVisible(true);
+    }
 
     private void reIndex()
     {
@@ -39,9 +40,12 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
     public void paint(Graphics g)
     {
         reIndex();
-        g.setFont(f);
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(new Color(0,0,0));
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setFont(f);
         //clear the whole panel 
-        g.clearRect(0, 30, this.getWidth(), this.getHeight());
+        g2.clearRect(0, 30, this.getWidth(), this.getHeight());
         //draw each node
         for (Node nodeIterator : NodeList)
         {
@@ -54,15 +58,15 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
                 linksIterator.paint(g);
         }
     }
-	
-	public void clear()
-	{
-		while(NodeList.isEmpty() == false)
-		{
-			NodeList.remove(0);
-		}
-		repaint();
-	}
+
+    public void clear()
+    {
+        while(NodeList.isEmpty() == false)
+        {
+            NodeList.remove(0);
+        }
+        repaint();
+    }
 
     public Node getClosest(int x, int y)
     {
@@ -119,7 +123,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
                     {
                         System.out.println("processing link");
                         Node node_to = link.to();
-//                        for(Link link_to : node_to.getLinks())
+                        //                        for(Link link_to : node_to.getLinks())
                         for(int i = 0; i < node_to.getLinks().size(); i++) 
                         {
                             Link link_to = node_to.getLinks().get(i);
@@ -129,7 +133,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
                                 System.out.println("  That link goes to the clicked node");
                                 node_to.getLinks().remove(link_to);
                             }
-                    }
+                        }
                     }
                     NodeList.remove(closestNode);
                     repaint();
@@ -140,10 +144,10 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
             repaint();
         }
 
-		if(e.getButton() == 2)
-		{
-			
-		}
+        if(e.getButton() == 2)
+        {
+
+        }
 
     }
 
@@ -184,7 +188,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
     public void mousePressed(MouseEvent e)
     {
-		int x = e.getX();
+        int x = e.getX();
         int y = e.getY();
 
         System.out.println("Pressed");
@@ -192,7 +196,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         {
             System.out.println("Button 1");
 
-            
+
             System.out.println("Pos : " + x + "x" + y);
 
             linkOrigin = getClosest(x,y);
@@ -203,26 +207,26 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
             linkDest = null;
         }
 
-		if(e.getButton() == 2)
+        if(e.getButton() == 2)
         {
-			Node closestNode = getClosest(x,y);
-			
-			if(getDistance(closestNode, x, y) <= 10)
-			{
-				closestNode.setX(x);
-				closestNode.setY(y);
-				repaint();
-			}
+            Node closestNode = getClosest(x,y);
+
+            if(getDistance(closestNode, x, y) <= 10)
+            {
+                closestNode.setX(x);
+                closestNode.setY(y);
+                repaint();
+            }
         }
 
     }
 
-	public void mouseDragged(MouseEvent e)
-	{
-	}
+    public void mouseDragged(MouseEvent e)
+    {
+    }
 
-	public void mouseMoved(MouseEvent e)
-	{
-	}
+    public void mouseMoved(MouseEvent e)
+    {
+    }
 
 }

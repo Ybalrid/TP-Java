@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
@@ -18,9 +19,9 @@ public class Link extends JPanel
 
 
 	public void paint(Graphics g)
-	{
-        System.out.println("drawing link");
-        g.drawLine(from.x(), from.y(), to.x(), to.y());
+	{   
+        Graphics2D g2 = (Graphics2D) g;
+        g2.drawLine(from.x(), from.y(), to.x(), to.y());
 	}
 
     public Node from()

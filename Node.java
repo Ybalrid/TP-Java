@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
@@ -21,12 +22,11 @@ public class Node extends JPanel
 
 	public void paint(Graphics g)
 	{
-        System.out.println("print node's point");
+        Graphics2D g2 = (Graphics2D) g;
         //Draw node point
-		g.fillOval(X - 5, Y - 5, 10, 10);
+		g2.fillOval(X - 5, Y - 5, 10, 10);
         //Draw node ID
-        System.out.println("print node's ID");
-		g.drawString(Integer.toString(ID), X + 5, Y + 5);
+		g2.drawString(Integer.toString(ID), X + 5, Y + 5);
 	}
     
     public void addLink(Node dest)
