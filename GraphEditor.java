@@ -47,6 +47,15 @@ public class GraphEditor extends JPanel implements MouseListener
                 linksIterator.paint(g);
         }
     }
+	
+	public void clear()
+	{
+		while(NodeList.isEmpty() == false)
+		{
+			NodeList.remove(0);
+		}
+		repaint();
+	}
 
     public Node getClosest(int x, int y)
     {
@@ -123,6 +132,11 @@ public class GraphEditor extends JPanel implements MouseListener
             NodeList.add(new Node(x,y,ID++));
             repaint();
         }
+
+		if(e.getButton() == 2)
+		{
+		
+		}
 
         if(e.getButton() == 3)
         {
