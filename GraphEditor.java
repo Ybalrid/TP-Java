@@ -210,4 +210,12 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
     }
 
+	public void mouseDragged(MouseEvent e)
+	{
+	}
+
+	public void mouseMoved(MouseEvent e)
+	{
+	}
+
 }
