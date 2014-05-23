@@ -22,7 +22,6 @@ public class Graph
                 System.setProperty( "apple.laf.useScreenMenuBar", "true" ); // for older versions of Java
             } 
             catch ( SecurityException e ) 
-
             {
             }
         }

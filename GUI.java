@@ -8,9 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Cursor;
 
-import java.io.*;
-
-
 
 public class GUI extends JFrame
 {
@@ -39,6 +36,7 @@ public class GUI extends JFrame
 	JMenuItem breadth_ = new JMenuItem("Breadth-First");
 	JMenuItem djikstra_ = new JMenuItem("Djikstra");
 	
+	//Creating the items displayed in Help
 	JMenuItem manual_ = new JMenuItem("Manual");
 	JMenuItem about_ = new JMenuItem("About");		
 
@@ -50,32 +48,47 @@ public class GUI extends JFrame
     public GUI()
     {
 		System.out.println("Constructeur !");
-		
+	    
+        boolean isOnMac = System.getProperty("os.name").equals("Mac OS X");
+        
+        //Construct window : 
         setTitle("Graph Editor");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setSize(800, 450);
-		this.add(graph);
-		file.add(new_);
+	
+        this.add(graph);
+	    
+        //Construct menubar
+        file.add(new_);
         file.add(open_);
         file.addSeparator();
         file.add(save_);
         file.add(save_as_);
-        file.addSeparator();
-        file.add(quit_);
-		edit.add(clear_);
-		algo.add(depth_);
+        if(!isOnMac) //handeled by OS X
+        {
+            file.addSeparator();
+            file.add(quit_);
+        }
+        
+        edit.add(clear_);
+		
+        algo.add(depth_);
 		algo.add(breadth_);
 		algo.addSeparator();
 		algo.add(djikstra_);
 		help.add(manual_);
-		help.add(about_);
-		setVisible(true);
-		menuBar.add(file);
+        if(!isOnMac)   
+    		help.add(about_);
+	
+        setVisible(true);//Show the window THEN add the menu bar
+		
+        menuBar.add(file);
 		menuBar.add(edit);
 		menuBar.add(algo);
 		menuBar.add(help);
-		setJMenuBar(menuBar);
+		
+        setJMenuBar(menuBar);
 		setCursor(algoCurs);
 
 		quit_.addActionListener(new ActionListener()
