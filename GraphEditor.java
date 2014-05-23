@@ -12,7 +12,6 @@ import java.io.*;
 public class GraphEditor extends JPanel implements MouseListener, MouseMotionListener
 {
 
-    //Atributes for GUI
     Font f;
 
     private ArrayList<Node> NodeList = new ArrayList<Node>();
@@ -23,6 +22,9 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
     private Node linkDest = null;
 
     private FileManager Fm = new FileManager();
+    
+    //Set if the next user drawn Link will be An oriented one. false by default.
+    private boolean orientedMode = false;
 
     public GraphEditor()
     {
@@ -39,21 +41,33 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
     public void paint(Graphics g)
     {
+        //Reorganise the ArrayList properly.
         reIndex();
+        
+        //Recast to acces advenced 2D graphics composition tools
         Graphics2D g2 = (Graphics2D) g;
+
+        //Reset drawing color to Black (default)
         g2.setColor(new Color(0,0,0));
+
+        //Set antialiasing for drawing
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+        
+        //Set a nicer font
         g2.setFont(f);
-        //clear the whole panel 
+
+        //Clear the whole panel 
         g2.clearRect(0, 30, this.getWidth(), this.getHeight());
-        //draw each node
+        //Draw each node
         for (Node nodeIterator : NodeList)
         {
             nodeIterator.paint(g);
-
+            
+            //if no connection, iterate to next node
             if(nodeIterator.getLinks().isEmpty())
                 continue;
-
+            
+            //draw all links 
             for(Link linksIterator : nodeIterator.getLinks())
                 linksIterator.paint(g);
         }
@@ -61,10 +75,8 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
     public void clear()
     {
-        while(NodeList.isEmpty() == false)
-        {
+        while(!NodeList.isEmpty())
             NodeList.remove(0);
-        }
         repaint();
     }
 
@@ -73,16 +85,15 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         //drop if there is no node on the editor
         if(NodeList.isEmpty()) return null;
 
-        System.out.println("Get closest node from " + x + "x" + y);
 
         double distance = 0;
+        //big fat pixel number... Stupidest way to initializa that value, but it's working flawlessly so...
         double reference = 1000000000;
         Node closest = null;
 
         //for each Node in NodeList
         for(Node myNode : NodeList)
         {
-            System.out.println("getting distance for node " + myNode.getID());
 
             //calculate distance
             distance = getDistance(myNode,x,y);
@@ -90,7 +101,6 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
             if(distance < reference)
             {
-                System.out.println("New closest is now : " +  myNode.getID());
                 closest = myNode;
                 reference = distance;
             }
@@ -113,29 +123,27 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
         if(e.getButton() == 1)
         {
+            //The rather ugly chunk of code that erase a Node.
             Node closestNode = getClosest(x,y);
             if(closestNode != null)
                 if(getDistance(closestNode, x, y) <= 10)
                 {
-                    System.out.println("Node " + closestNode.getID() + " clicked");
 
                     for(Link link : closestNode.getLinks())
                     {
-                        System.out.println("processing link");
                         Node node_to = link.to();
                         //                        for(Link link_to : node_to.getLinks())
                         for(int i = 0; i < node_to.getLinks().size(); i++) 
                         {
                             Link link_to = node_to.getLinks().get(i);
-                            System.out.println(" Link form \"child\" node");
                             if(link_to.to() == closestNode)
                             {
-                                System.out.println("  That link goes to the clicked node");
                                 node_to.getLinks().remove(link_to);
                             }
                         }
                     }
                     NodeList.remove(closestNode);
+                    reIndex(); //only moment it's usefull.@
                     repaint();
                     return;
                 }
