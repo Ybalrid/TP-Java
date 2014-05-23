@@ -125,7 +125,7 @@ public class GUI extends JFrame implements MouseListener
         {
             Node closestNode = getClosest(x,y);
             if(closestNode != null)
-                if(getDistance(closestNode, x, y) <= 5)
+                if(getDistance(closestNode, x, y) <= 10)
                 {
                     System.out.println("Node " + closestNode.getID() + " clicked");
 
