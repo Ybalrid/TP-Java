@@ -45,7 +45,6 @@ public class GUI extends JFrame
 	Cursor main = new Cursor(Cursor.HAND_CURSOR);
 	Cursor algoCurs = new Cursor(Cursor.CROSSHAIR_CURSOR);
     
-    private FileManager Fm = new FileManager();
     
     public GUI()
     {
