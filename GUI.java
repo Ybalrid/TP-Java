@@ -24,7 +24,6 @@ public class GUI extends JFrame
     JMenuItem quit_ = new JMenuItem("Quit");
 	GraphEditor graph = new GraphEditor();
     
-    private FileManager Fm = new FileManager();
     
     public GUI()
     {
