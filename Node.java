@@ -6,11 +6,11 @@ import java.lang.Math;
 
 public class Node extends JPanel
 {
-	ArrayList<Link> LinkList = new ArrayList<Link>();
+	private ArrayList<Link> LinkList = new ArrayList<Link>();
 
-	int ID;
-	int X;
-	int Y;
+	private int ID;
+	private int X;
+	private int Y;
 
 	Node(int X, int Y, int ID)
 	{

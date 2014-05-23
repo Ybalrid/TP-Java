@@ -9,27 +9,30 @@ import javax.swing.JPanel;
 public class GUI extends JFrame implements MouseListener
 {
     ArrayList<Node> NodeList = new ArrayList<Node>();
-    //ArrayList<Integer> usedID = new ArrayList<Integer>();
 
     int ID = 0;	
 
     private Node linkOrigin = null;
     private Node linkDest = null;
-
+    
+    Font f;
+    
     public GUI()
     {
-        this.setTitle("GraphESIEA");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(800, 450);
-        this.setVisible(true);
+        setTitle("GraphESIEA");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(800, 450);
+        setVisible(true);
 
         JPanel panel = new JPanel();
-        this.addMouseListener(this);
+        addMouseListener(this);
 
+        f = new Font("Helvetica", Font.BOLD, 12);
     }
 
     public void paint(Graphics g)
     {
+        g.setFont(f);
         //clear the whole panel 
         g.clearRect(0, 0, this.getWidth(), this.getHeight());
         //draw each node
@@ -53,7 +56,7 @@ public class GUI extends JFrame implements MouseListener
         System.out.println("Get colsest node from " + x + "x" + y);
 
         double distance = 0;
-        double reference = 100000000;// getDistance(NodeList.get(0), x, y);
+        double reference = 1000000000;
         Node closest = null;
 
         //for each Node in NodeList
@@ -78,7 +81,7 @@ public class GUI extends JFrame implements MouseListener
 
     public double getDistance(Node target, int x, int y)
     {
-        return Math.sqrt((target.X-x)*(target.X-x) + (target.Y-y)*(target.Y-y));
+        return Math.sqrt((target.x()-x)*(target.x()-x) + (target.y()-y)*(target.y()-y));
     }
 
     // ----------------------- MOUSE LISTENER -------------------------------
@@ -90,6 +93,33 @@ public class GUI extends JFrame implements MouseListener
 
         if(e.getButton() == 1)
         {
+            Node closestNode = getClosest(x,y);
+            if(closestNode != null)
+                if(getDistance(closestNode, x, y) <= 5)
+                {
+                    System.out.println("Node " + closestNode.getID() + " clicked");
+
+                    for(Link link : closestNode.getLinks())
+                    {
+                        System.out.println("processing link");
+                        Node node_to = link.to();
+//                        for(Link link_to : node_to.getLinks())
+                        for(int i = 0; i < node_to.getLinks().size(); i++) 
+                        {
+                            Link link_to = node_to.getLinks().get(i);
+                            System.out.println(" Link form \"child\" node");
+                            if(link_to.to() == closestNode)
+                            {
+                                System.out.println("  That link goes to the clicked node");
+                                node_to.getLinks().remove(link_to);
+                            }
+                    }
+                    }
+                    NodeList.remove(closestNode);
+                    repaint();
+                    return;
+                }
+
             NodeList.add(new Node(x,y,ID++));
             repaint();
         }
@@ -128,7 +158,9 @@ public class GUI extends JFrame implements MouseListener
             if(linkOrigin != null && linkDest != null)
                 if(linkOrigin != linkDest)
                 {
+                    //Non-oriented.
                     linkOrigin.addLink(linkDest);
+                    linkDest.addLink(linkOrigin);
                     repaint();
                 }
         }
