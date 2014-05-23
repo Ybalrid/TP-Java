@@ -7,8 +7,10 @@ import java.lang.Math;
 
 public class Link extends JPanel
 {
-	Node from;
-	Node to;
+	private Node from;
+	private Node to;
+    
+    private boolean oriented = false;
 
 	Link(Node from, Node to)
 	{
@@ -20,6 +22,7 @@ public class Link extends JPanel
 
 	public void paint(Graphics g)
 	{   
+        if(!oriented && from.getID() > to.getID()) return;
         Graphics2D g2 = (Graphics2D) g;
         g2.drawLine(from.x(), from.y(), to.x(), to.y());
 	}
