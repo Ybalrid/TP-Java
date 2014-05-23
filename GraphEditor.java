@@ -41,9 +41,6 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
     public void paint(Graphics g)
     {
-        //Reorganise the ArrayList properly.
-        reIndex();
-        
         //Recast to acces advenced 2D graphics composition tools
         Graphics2D g2 = (Graphics2D) g;
 
