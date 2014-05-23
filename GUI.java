@@ -32,6 +32,7 @@ public class GUI extends JFrame implements MouseListener
     private Node linkOrigin = null;
     private Node linkDest = null;
     
+    private FileManager Fm = new FileManager();
     
     public GUI()
     {
