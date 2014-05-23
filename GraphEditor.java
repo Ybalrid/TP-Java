@@ -28,10 +28,17 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 		addMouseListener(this);
 		f = new Font("Helvetica", Font.BOLD, 12);
 		setVisible(true);
-	}    
+	}
+
+    private void reIndex()
+    {
+        for(int i = 0; i < NodeList.size(); i++)
+            NodeList.get(i).setID(i);
+    }
 
     public void paint(Graphics g)
     {
+        reIndex();
         g.setFont(f);
         //clear the whole panel 
         g.clearRect(0, 30, this.getWidth(), this.getHeight());

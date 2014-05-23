@@ -55,13 +55,23 @@ public class Node extends JPanel
         return Y;
     }
 
-	public void setY(int y)
-	{
-		Y = y;
-	}
+
+    public void setID(int id)
+    {
+        if(ID > 0)
+            ID = id;
+    }
 
 	public void setX(int x)
 	{
-		X = x;
+        if(x > 0)
+    		X = x;
 	}
+	
+    public void setY(int y)
+	{
+        if(y > 0)
+    		Y = y;
+	}
+
 }
