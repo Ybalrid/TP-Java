@@ -34,7 +34,7 @@ public class GraphEditor extends JPanel implements MouseListener
     {
         g.setFont(f);
         //clear the whole panel 
-        g.clearRect(0, 30, this.getWidth(), this.getHeight());
+        g.clearRect(0, 0, this.getWidth(), this.getHeight());
         //draw each node
         for (Node nodeIterator : NodeList)
         {
