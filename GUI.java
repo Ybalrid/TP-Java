@@ -160,4 +160,11 @@ public class GUI extends JFrame
          Graphics2D g2 =(Graphics2D) g;
          graph.paint(g2);
      }
+
+	public void actionPerformed(ActionEvent e)
+	{
+
+	    repaint();
+	}
+
 }
