@@ -18,6 +18,7 @@ public class GUI extends JFrame
 	//Creating the categories of the MenuBar
     JMenu file = new JMenu("File");
 	JMenu edit = new JMenu("Edit");
+	JMenu tools = new JMenu("Tools");
 	JMenu algo = new JMenu("Algorithms");
 	JMenu help = new JMenu("Help");
 
@@ -30,6 +31,11 @@ public class GUI extends JFrame
 	
 	//Creating the items displayed in Edit
 	JMenuItem clear_ = new JMenuItem("Clear");
+
+	//Creating the items displayed in Tools
+	JMenuItem add_ = new JMenuItem("Add");
+	JMenuItem move_ = new JMenuItem("Move");
+	JMenuItem delete_ = new JMenuItem("Delete");
 	
 	//Creating the items displayed in Algorithms
 	JMenuItem depth_ = new JMenuItem("Depth-First");
@@ -41,14 +47,15 @@ public class GUI extends JFrame
 	JMenuItem about_ = new JMenuItem("About");		
 
 	GraphEditor graph = new GraphEditor();
-	Cursor main = new Cursor(Cursor.HAND_CURSOR);
-	Cursor algoCurs = new Cursor(Cursor.CROSSHAIR_CURSOR);
-    
-    
-    public GUI()
+
+	//Creating cursors to be able to switch between them depending on the tool selected by the user.
+	Cursor mainCurs = new Cursor(Cursor.DEFAULT_CURSOR);
+	Cursor algoCurs = new Cursor(Cursor.HAND_CURSOR);
+    Cursor deleteCurs = new Cursor(Cursor.CROSSHAIR_CURSOR);
+	Cursor moveCurs = new Cursor(Cursor.MOVE_CURSOR);    
+   public GUI()
     {
 		System.out.println("Constructeur !");
-	    
         boolean isOnMac = System.getProperty("os.name").equals("Mac OS X");
         
         //Construct window : 
@@ -56,7 +63,6 @@ public class GUI extends JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setSize(800, 450);
-	
         this.add(graph);
 	    
         //Construct menubar
@@ -72,6 +78,10 @@ public class GUI extends JFrame
         }
         
         edit.add(clear_);
+
+		tools.add(add_);
+		tools.add(move_);
+		tools.add(delete_);
 		
         algo.add(depth_);
 		algo.add(breadth_);
@@ -85,20 +95,21 @@ public class GUI extends JFrame
 		
         menuBar.add(file);
 		menuBar.add(edit);
+		menuBar.add(tools);
 		menuBar.add(algo);
 		menuBar.add(help);
 		
         setJMenuBar(menuBar);
-		setCursor(algoCurs);
         
-		this.addComponentListener(new ComponentAdapter() 
+
+		/************ACTION LISTENERS FOR THE MENU ITEMS******************/
+		/*this.addComponentListener(new ComponentAdapter() 
 		{
             public void componentResized(ComponentEvent e) 
 			{             
-                graph.repaint();
-				System.out.println("HIIII");
+               
             }
-        });
+        });*/
 		quit_.addActionListener(new ActionListener()
 		{
       		public void actionPerformed(ActionEvent arg0) 
@@ -113,10 +124,34 @@ public class GUI extends JFrame
 			{
 	        	graph.clear();
 	      	}        
-    	});
+    	});	
 
-					       
-		
+		add_.addActionListener(new ActionListener()
+		{
+      		public void actionPerformed(ActionEvent arg0) 
+			{
+	        	graph.setEditorMode(0);
+				setCursor(mainCurs);
+	      	}        
+    	});	
+
+		move_.addActionListener(new ActionListener()
+		{
+      		public void actionPerformed(ActionEvent arg0) 
+			{
+	        	graph.setEditorMode(1);
+				setCursor(moveCurs);
+	      	}        
+    	});	
+
+		delete_.addActionListener(new ActionListener()
+		{
+      		public void actionPerformed(ActionEvent arg0) 
+			{
+	        	graph.setEditorMode(2);
+				setCursor(deleteCurs);
+	      	}        
+    	});	
     }
 
 	 public void paint(Graphics g)

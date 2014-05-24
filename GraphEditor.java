@@ -15,7 +15,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
     Font f;
 
     private ArrayList<Node> NodeList = new ArrayList<Node>();
-
+	private int editorMode = 0;
     private int ID = 0;	
 
     private Node linkOrigin = null;
@@ -115,6 +115,11 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         return Math.sqrt((target.x()-x)*(target.x()-x) + (target.y()-y)*(target.y()-y));
     }
 
+	
+	public void setEditorMode(int mode)
+	{
+		editorMode = mode;
+	}
     // ----------------------- MOUSE LISTENER -------------------------------
 
     public void mouseClicked(MouseEvent e)
@@ -124,41 +129,49 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
         if(e.getButton() == 1)
         {
-            //The rather ugly chunk of code that erase a Node.
-            Node closestNode = getClosest(x,y);
-            if(closestNode != null)
-                if(getDistance(closestNode, x, y) <= 10)
-                {
 
-                    for(Link link : closestNode.getLinks())
-                    {
-                        Node node_to = link.to();
-                        //                        for(Link link_to : node_to.getLinks())
-                        for(int i = 0; i < node_to.getLinks().size(); i++) 
-                        {
-                            Link link_to = node_to.getLinks().get(i);
-                            if(link_to.to() == closestNode)
-                            {
-                                node_to.getLinks().remove(link_to);
-                            }
-                        }
-                    }
-                    NodeList.remove(closestNode);
-                    reIndex(); //only moment it's usefull
-                    ID = NodeList.size();
-                    repaint();
-                    return;
-                }
+			Node closestNode = getClosest(x,y);
+            if(editorMode == 2)//The rather ugly chunk of code that erase a Node.
+			{
+        		
+        		if(closestNode != null)
+				{
+             	   if(getDistance(closestNode, x, y) <= 10)
+             	   {
 
-            NodeList.add(new Node(x,y,ID++));
+             	       for(Link link : closestNode.getLinks())
+             	       {
+             	           Node node_to = link.to();
+             	           //                        for(Link link_to : node_to.getLinks())
+             	           for(int i = 0; i < node_to.getLinks().size(); i++) 
+             	           {
+             	               Link link_to = node_to.getLinks().get(i);
+             	               if(link_to.to() == closestNode)
+             	               {
+             	                   node_to.getLinks().remove(link_to);
+             	               }
+             	           }
+             	       }
+             	       NodeList.remove(closestNode);
+             	       reIndex(); //only moment it's usefull
+             	       ID = NodeList.size();
+             	       repaint();
+             	       return;
+             	   }
+				}
+			}
+			if(editorMode == 0)
+			{	
+				if(closestNode != null)	
+				{
+					if(getDistance(closestNode, x, y) >= 30)
+            			NodeList.add(new Node(x,y,ID++));
+				}
+				else
+					NodeList.add(new Node(x,y,ID++));
+			}
             repaint();
         }
-
-        if(e.getButton() == 2)
-        {
-
-        }
-
     }
 
     public void mouseExited(MouseEvent e)
@@ -172,7 +185,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
     public void mouseReleased(MouseEvent e)
     { 
         System.out.println("Released");
-        if(e.getButton() == 1)
+        if(e.getButton() == 1 && editorMode == 0)
         {
             System.out.println("Button 1");
             int x = e.getX();
@@ -186,20 +199,20 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
                 System.out.println("Dest found : " +  linkDest.x() +  "x" +  linkDest.y());
 
             if(linkOrigin != null && linkDest != null)
-                if(linkOrigin != linkDest)
+            {
+			    if(linkOrigin != linkDest)
                 {
                     linkOrigin.addLink(linkDest);
-                    if(!orientedMode)
+                    
+					if(!orientedMode)
                         linkDest.addLink(linkOrigin); //Add the reverse link.
+
                     repaint();
                 }
-        }
-        if(e.getButton() == 2)
-        {
+			}
+		}
             draggNode = false;
             draggedNode = null;
-
-        }
     }
 
     public void mousePressed(MouseEvent e)
@@ -212,30 +225,33 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         {
             System.out.println("Button 1");
 
+			if(editorMode == 1)
+    	    {
+    	        System.out.println("Middle click button");
+    	        System.out.println("Dragged on " + x + "x" + y); 
+    	        Node closestNode = getClosest(x,y);
+
+    	        if(getDistance(closestNode, x, y) <= 10)
+    	        {
+    	            draggedNode = closestNode;
+    	            draggNode = true;
+    	        }
+    	    }
+
 
             System.out.println("Pos : " + x + "x" + y);
+			
+			if(editorMode == 0)
+			{
+	            linkOrigin = getClosest(x,y);
+	
+	            if(linkOrigin != null)
+	                System.out.println("Origin found : " +  linkOrigin.x() +  "x" +  linkOrigin.y());
 
-            linkOrigin = getClosest(x,y);
-
-            if(linkOrigin != null)
-                System.out.println("Origin found : " +  linkOrigin.x() +  "x" +  linkOrigin.y());
-
-            linkDest = null;
+	            linkDest = null;
+			}
         }
-        
-        if(e.getButton() == 2)
-        {
-            System.out.println("Middle click button");
-            System.out.println("Dragged on " + x + "x" + y); 
-            Node closestNode = getClosest(x,y);
-
-            if(getDistance(closestNode, x, y) <= 10)
-            {
-                draggedNode = closestNode;
-                draggNode = true;
-            }
-        }
-
+      
     }
 
     public void mouseDragged(MouseEvent e)
@@ -245,19 +261,22 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         
         System.out.println("mouseDragged");
         
-        if(draggedNode != null)
-            if(draggNode)
-            {
-                draggedNode.setX(x);
-                draggedNode.setY(y);
-                repaint();
-            }
+		if(editorMode == 1)
+		{
+        	if(draggedNode != null)
+        	    if(draggNode)
+        	    {
+        	        draggedNode.setX(x);
+        	        draggedNode.setY(y);
+        	        repaint();
+        	    }
+		}
 
     }
 
     public void mouseMoved(MouseEvent e)
     {
-        System.out.println("mouseMoved");
+        //System.out.println("mouseMoved");
         int x = e.getX();
         int y = e.getY();
        
