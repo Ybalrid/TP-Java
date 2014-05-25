@@ -16,18 +16,24 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
     private ArrayList<Node> NodeList = new ArrayList<Node>();
 	private int editorMode = 0;
+
+    //Editor mode descriptor : 
+    // 0 = Add
+    // 1 = Move
+    // 2 = Delete
+    
     private int ID = 0;	
 
     private Node linkOrigin = null;
     private Node linkDest = null;
 
-    private FileManager Fm = new FileManager();
     
     //Set if the next user drawn Link will be An oriented one. false by default.
     private boolean orientedMode = false;
     
     private boolean draggNode = false;
     private Node draggedNode = null;
+    
     public GraphEditor()
     {
         addMouseListener(this);
@@ -36,12 +42,14 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         setVisible(true);
     }
 
+    ///Reset Node ID from their position in NodeList ArrayList
     private void reIndex()
     {
         for(int i = 0; i < NodeList.size(); i++)
             NodeList.get(i).setID(i);
     }
 
+    //Draw the Grap panel
     public void paint(Graphics g)
     {
         //Recast to acces advenced 2D graphics composition tools
@@ -73,6 +81,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         }
     }
 
+    //Remove all nodes
     public void clear()
     {
         while(!NodeList.isEmpty())
@@ -81,6 +90,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         ID = 0;
     }
 
+    
     public Node getClosest(int x, int y)
     {
         //drop if there is no node on the editor
@@ -281,6 +291,57 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         int x = e.getX();
         int y = e.getY();
        
+    }
+
+
+    // ----------------------- FILE MANAGER INTERFACE -------------------------------  
+    
+    private boolean knowFilePath = false;
+    private String filePath;
+    
+    private boolean changesSaved = false;
+
+    private FileManager Fm = new FileManager();
+    private void setFilePath(String path)
+    {
+        knowFilePath = true;
+        filePath = path;
+
+    }
+    
+    private boolean askForConfirmation(String message)
+    {
+        return true;
+    }
+    
+    public void newMenuAction()
+    {
+        if(!changesSaved) 
+            if(!askForConfirmation("Changes not saved. Do you want to discard changes ?"))
+                return;
+
+        knowFilePath = false;
+        filePath = null;
+        clear();
+    }
+    
+    public void saveMenuAction()
+    {
+
+    }
+
+    public void saveAsMenuAction(String Path)
+    {
+        setFilePath(filePath);
+        saveMenuAction();
+    }
+
+    public void openMenuAction(String path)
+    {
+        newMenuAction();
+        NodeList = Fm.readListFromFile(path);
+        reIndex();
+        repaint();
     }
 
 }
