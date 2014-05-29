@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 import java.io.*;
 
-public class Algorithm extends thread
+public class Algorithm extends Thread
 {
 	private ArrayList<Node> NodeCp = new ArrayList<Node>();	
 
