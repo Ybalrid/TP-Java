@@ -127,7 +127,7 @@ public class GUI extends JFrame
             FileDialog fd = new FileDialog(parentFrameForDialog, "Save Graph as...", FileDialog.SAVE);
             fd.setMultipleMode(false);
             fd.setFile("*.graph");
-            fd.show();
+            fd.setVisible(true);
             graph.saveAsMenuAction(fd.getFile());
 
             }
@@ -142,7 +142,7 @@ public class GUI extends JFrame
             FileDialog fd = new FileDialog(parentFrameForDialog, "Save Graph as...", FileDialog.SAVE);
             fd.setMultipleMode(false);
             fd.setFile("*.graph");
-            fd.show();
+            fd.setVisible(true);
             graph.saveAsMenuAction(fd.getFile());
 
         }        
@@ -155,7 +155,7 @@ public class GUI extends JFrame
             FileDialog fd = new FileDialog(parentFrameForDialog, "Open Graph...", FileDialog.LOAD);
             fd.setMultipleMode(false);
             fd.setFile("*.graph");
-            fd.show();
+            fd.setVisible(true);
             graph.openMenuAction(fd.getFile());
         }
         });
