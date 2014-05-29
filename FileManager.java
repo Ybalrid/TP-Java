@@ -11,7 +11,6 @@ public class FileManager
     private File fi = null;
     private File fo = null;
 
-
     private void printf(String s)
     {
         System.out.println(s);
@@ -20,6 +19,38 @@ public class FileManager
     public FileManager()
     {
         System.out.println("FileManager constructed.");
+    }
+
+    public boolean writeListToFile(String path, ArrayList<Node> list)
+    {
+        System.out.println("Write list to file " + path);
+        int endCode = -1;
+        try
+        {
+            fo = new File(path);
+            fw = new FileWriter(fo);
+            for(Node iterator : list)
+            {
+                fw.write(new String(" " + iterator.x()));
+                fw.write(new String(" " + iterator.y()));
+            }
+            fw.write(new String(" " + endCode));
+
+            for(Node iterator : list)
+            {
+                for(Link linkIterator : iterator.getLinks())
+                {
+                    fw.write(new String(" " + linkIterator.from().getID()));
+                    fw.write(new String(" " + linkIterator.to().getID()));
+                }
+            }
+
+        }
+        catch (IOException e)
+        {
+            return false;
+        }
+        return true;
     }
 
     public ArrayList<Node> readListFromFile(String path)

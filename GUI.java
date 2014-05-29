@@ -150,9 +150,6 @@ public class GUI extends JFrame
         });
 
 
-
-
-
         quit_.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent arg0) 

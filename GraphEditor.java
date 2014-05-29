@@ -325,9 +325,17 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         clear();
     }
     
-    public void saveMenuAction()
+    public boolean saveMenuAction()
     {
-
+        if(knowFilePath)
+        {
+            if(!Fm.writeListToFile(filePath, NodeList))
+                System.out.println("something goes wrong...");
+            return true;
+        }
+        else
+            //display a dialog... 
+            return false;
     }
 
     public void saveAsMenuAction(String Path)
