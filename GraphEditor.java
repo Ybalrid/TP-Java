@@ -35,21 +35,26 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
     private Node draggedNode = null;
 
 
-    Algorithm engine = null;
+    AlgorithmDisplayer algoDisp = null;
+    AlgorithmRunner algoRun = null;
     public GraphEditor()
     {
         addMouseListener(this);
         addMouseMotionListener(this);
         f = new Font("Helvetica", Font.BOLD, 12);
         setVisible(true);
-        engine = new Algorithm(NodeList,this);
-        engine.start();
+
+        algoDisp = new AlgorithmDisplayer(NodeList,this);
+        algoDisp.start(); //start the thread
+
+        algoRun = new AlgorithmRunner(algoDisp,NodeList);
     }
     
     public void callRepaint()
     {
         repaint();
     }
+
     ///Reset Node ID from their position in NodeList ArrayList
     private void reIndex()
     {

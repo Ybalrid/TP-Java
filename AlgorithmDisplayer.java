@@ -9,22 +9,31 @@ import javax.swing.JPanel;
 
 import java.io.*;
 
-public class Algorithm extends Thread
+public class AlgorithmDisplayer extends Thread
 {
 	private ArrayList<Node> NodeCp = null;
-    
     private long delay = 200; //ms
-    
     private boolean state = false;
-    
     private GraphEditor parent = null;
+    private boolean animate = false;
+    private Queue displayQueue = new LinkedList();
 
-	public Algorithm(ArrayList<Node> NodeList, GraphEditor p)
+	public AlgorithmDisplayer(ArrayList<Node> NodeList, GraphEditor p)
 	{
 		NodeCp = NodeList;
         parent = p;
 	}
-    
+
+    public void addToDisplayQueye(Node n)
+    {
+        if(!animate)
+            displayQueue.add(n);
+    }
+
+    public void show()
+    {
+        animate = true;
+    }
 
     public void setDelay(long value)
     {
@@ -53,12 +62,18 @@ public class Algorithm extends Thread
     {
         if(NodeCp.isEmpty())
             return;
-        if(state)
+
+        if(toogle())
             NodeCp.get(0).setColor(Color.RED);
         else
             NodeCp.get(0).setColor(Color.GREEN);
 
-        toogle();
+
+        if(animate)
+        {
+            //Do the hard job here
+        }
+
         if(parent != null)
             parent.callRepaint();
     }
