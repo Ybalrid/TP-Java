@@ -42,10 +42,14 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         addMouseMotionListener(this);
         f = new Font("Helvetica", Font.BOLD, 12);
         setVisible(true);
-        engine = new Algorithm(NodeList);
-
+        engine = new Algorithm(NodeList,this);
+        engine.start();
     }
-
+    
+    public void callRepaint()
+    {
+        repaint();
+    }
     ///Reset Node ID from their position in NodeList ArrayList
     private void reIndex()
     {
@@ -339,7 +343,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
             return true;
         }
         else
-            //display a dialog... 
+            //will display a dialog... 
             return false;
     }
 
