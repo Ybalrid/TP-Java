@@ -6,7 +6,6 @@ Dépot privé de notre TP JAVA
 TO-DO :
 -------
 
--Finish the implementation of save feature.(HIGH)
 -Allow Oriented and Valuated Grahps.(MEDIUM)
 -Implements DepthFirtst and BradFirst algorithms.(HIGH)
 -Implements Djikstra.(HIGH)
@@ -16,4 +15,3 @@ TO-DO :
 -Implements a basic console (to display text informations).(LOW)
 -Add a select tool.(LOW)
 -Add some link creation methods (like you select a Node, specifies a Number and it creates links with Nearby Nodes).(LOW)
--
