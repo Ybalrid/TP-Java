@@ -16,7 +16,7 @@ public class AlgorithmDisplayer extends Thread
     private boolean state = false;
     private GraphEditor parent = null;
     private boolean animate = false;
-    private Queue displayQueue = new LinkedList();
+    private Queue<Node> displayQueue = new LinkedList<Node>();
 
 	public AlgorithmDisplayer(ArrayList<Node> NodeList, GraphEditor p)
 	{
