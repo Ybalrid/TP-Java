@@ -7,10 +7,9 @@ import java.io.IOException;
 public class FileManager
 {
     private FileWriter fw = null;
-    private FileReader fr = null;
+    private BufferedWriter bw = null;
     private File fi = null;
     private File fo = null;
-
 
     private void printf(String s)
     {
@@ -22,12 +21,46 @@ public class FileManager
         System.out.println("FileManager constructed.");
     }
 
+    public boolean writeListToFile(String path, ArrayList<Node> list)
+    {
+        System.out.println("Write list to file " + path);
+        int endCode = -1;
+        try
+        {
+            fo = new File(path);
+            fw = new FileWriter(fo);
+            bw = new BufferedWriter(fw);
+            for(Node iterator : list)
+            {
+                bw.write(new String(" " + iterator.x()));
+                bw.write(new String(" " + iterator.y()));
+            }
+            
+            bw.write(new String(" " + endCode));
+
+            for(Node iterator : list)
+            {
+                for(Link linkIterator : iterator.getLinks())
+                {
+                    bw.write(new String(" " + linkIterator.from().getID()));
+                    bw.write(new String(" " + linkIterator.to().getID()));
+                }
+            }
+
+        bw.close();
+        }
+        catch (IOException e)
+        {
+            return false;
+        }
+        return true;
+    }
+
     public ArrayList<Node> readListFromFile(String path)
     {
         ArrayList<Node> readingList = new ArrayList<Node>();
         try{
             fi = new File(path);
-            fr = new FileReader(fi);
             Scanner s = new Scanner(fi);
             int r,i = 0;
             boolean nodeFinished = false;
