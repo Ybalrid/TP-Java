@@ -11,11 +11,13 @@ import java.io.*;
 
 public class Algorithm extends thread
 {
-	private ArrayList<Node> NodeCp = new ArrayList<Node>();	
+	private ArrayList<Node> NodeCp = new ArrayList<Node>();
+	private int algorithm = 0;	
 
-	public Algorithm(ArrayList<Node> NodeList)
+	public Algorithm(ArrayList<Node> NodeList, int algo)
 	{
 		NodeCp = NodeList;
+		algorithm = algo;
 	}
 
 	public void run() 
