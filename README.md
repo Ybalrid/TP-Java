@@ -6,7 +6,6 @@ Dépot privé de notre TP JAVA
 TO-DO :
 -------
 
--Correct bugs while opening a file (new Nodes' IDs start from 0 regardless of saved blocks IDs'). (HIGH)
 -Finish the implementation of save feature.(HIGH)
 -Allow Oriented and Valuated Grahps.(MEDIUM)
 -Implements DepthFirtst and BradFirst algorithms.(HIGH)

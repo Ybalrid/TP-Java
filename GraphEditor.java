@@ -48,6 +48,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
     {
         for(int i = 0; i < NodeList.size(); i++)
             NodeList.get(i).setID(i);
+        ID = NodeList.size();
     }
 
     //Draw the Grap panel
@@ -341,6 +342,11 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
     public void saveAsMenuAction(String Path)
     {
+        if(Path == null)
+        {
+            System.out.println("Something goes wrong here. null path ?");
+            return;
+        }
         setFilePath(filePath);
         saveMenuAction();
     }
@@ -351,6 +357,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         NodeList = Fm.readListFromFile(path);
         reIndex();
         repaint();
+
     }
 
 }
