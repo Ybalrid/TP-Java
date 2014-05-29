@@ -49,6 +49,13 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
         algoRun = new AlgorithmRunner(algoDisp,NodeList);
     }
+
+    public void testAlgoDisp()
+    {
+        for(Node n : NodeList)
+            algoDisp.addToDisplayQueue(n);
+        algoDisp.show();
+    }
     
     public void callRepaint()
     {

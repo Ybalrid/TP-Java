@@ -21,6 +21,7 @@ public class GUI extends JFrame
     JMenu tools = new JMenu("Tools");
     JMenu algo = new JMenu("Algorithms");
     JMenu help = new JMenu("Help");
+    JMenu debug = new JMenu("Debug");
 
     //Creating the items displayed in File
     JMenuItem new_ = new JMenuItem("New");
@@ -45,6 +46,9 @@ public class GUI extends JFrame
     //Creating the items displayed in Help
     JMenuItem manual_ = new JMenuItem("Manual");
     JMenuItem about_ = new JMenuItem("About");		
+
+    //Creating the items displayed in Debug
+    JMenuItem coloriseAllNodes_ = new JMenuItem("Colorise All Nodes");
 
     GraphEditor graph = new GraphEditor();
 
@@ -91,6 +95,7 @@ public class GUI extends JFrame
         if(!isOnMac)   
             help.add(about_);
 
+        debug.add(coloriseAllNodes_);
         setVisible(true);//Show the window THEN add the menu bar
 
         menuBar.add(file);
@@ -98,7 +103,7 @@ public class GUI extends JFrame
         menuBar.add(tools);
         menuBar.add(algo);
         menuBar.add(help);
-
+        menuBar.add(debug);
         setJMenuBar(menuBar);
 
 
@@ -201,6 +206,16 @@ public class GUI extends JFrame
         {
             graph.setEditorMode(2);
             setCursor(deleteCurs);
+        }        
+        });
+
+
+
+        coloriseAllNodes_.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent arg0) 
+        {
+            graph.testAlgoDisp();
         }        
         });	
     }
