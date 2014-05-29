@@ -11,7 +11,8 @@ public class Link extends JPanel
 	private Node to;
     
     private boolean oriented = false;
-
+    private boolean valuated = false;
+    private int value = 0;
 	
     private Color defaultColor = Color.BLACK;
     private Color drawingColor = null;
@@ -33,6 +34,15 @@ public class Link extends JPanel
             g2.setColor(drawingColor);
 
         g2.drawLine(from.x(), from.y(), to.x(), to.y());
+
+        if(valuated)
+        { 
+            g2.setColor(Color.BLUE);
+            g2.drawString(Integer.toString(value),(from.x() + to.x())/2, 5 + (from.y() + to.y())/2);
+        }
+
+        g2.setColor(defaultColor);
+
 	}
 
     public Node from()
@@ -45,8 +55,39 @@ public class Link extends JPanel
         return to;
     }
 
+    public int getValue()
+    {
+        return value;
+    }
+
+
     public void setColor(Color color)
     {
         drawingColor = color;
+    }
+
+    public void setValue(int newValue)
+    {
+        value = newValue;
+    }
+
+    public void setOriented(boolean state)
+    {
+        oriented = state;
+    }
+
+    public void setValuated(boolean state)
+    {
+        valuated = state;
+    }
+
+    public boolean isValuated()
+    {
+        return valuated;
+    }
+
+    public boolean isOriented()
+    {
+        return oriented;
     }
 }
