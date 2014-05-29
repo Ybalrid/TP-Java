@@ -24,7 +24,7 @@ public class AlgorithmDisplayer extends Thread
         parent = p;
 	}
 
-    public void addToDisplayQueye(Node n)
+    public void addToDisplayQueue(Node n)
     {
         if(!animate)
             displayQueue.add(n);
@@ -45,10 +45,10 @@ public class AlgorithmDisplayer extends Thread
         try
         {
 
-            System.out.println("run called");
+            System.out.println("Child Thread started");
             while(true)
             {
-                System.out.println("Iterate");
+                //System.out.println("Iterate");
                 this.sleep(delay);
                 refresh();
             }
@@ -63,15 +63,26 @@ public class AlgorithmDisplayer extends Thread
         if(NodeCp.isEmpty())
             return;
 
-        if(toogle())
+/*        if(toogle())
             NodeCp.get(0).setColor(Color.RED);
         else
-            NodeCp.get(0).setColor(Color.GREEN);
+            NodeCp.get(0).setColor(Color.GREEN);*/
 
 
         if(animate)
         {
             //Do the hard job here
+            if(displayQueue.isEmpty())
+            {
+                animate = false;
+                clearDisp();
+            }
+            else
+            {
+                Node nextNode = displayQueue.remove();
+                nextNode.setColor(Color.RED);
+            }
+
         }
 
         if(parent != null)
@@ -83,4 +94,12 @@ public class AlgorithmDisplayer extends Thread
         return state = !state;
     }
 
+    public void clearDisp()
+    {
+        if(animate) return;
+        for(int i = 0; i < NodeCp.size(); i++)
+            NodeCp.get(i).setColor(Color.BLACK);
+    }
 }
+
+
