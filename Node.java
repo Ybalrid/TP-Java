@@ -12,6 +12,10 @@ public class Node extends JPanel
 	private int ID;
 	private int X;
 	private int Y;
+    
+    private Color defaultColor = Color.BLACK;
+    
+    private Color drawingColor = null;
 
 	Node(int X, int Y, int ID)
 	{
@@ -24,9 +28,15 @@ public class Node extends JPanel
 	{
         Graphics2D g2 = (Graphics2D) g;
         //Draw node point
+
+        if(drawingColor != null)
+            g2.setColor(drawingColor);
 		g2.fillOval(X - 5, Y - 5, 10, 10);
+
         //Draw node ID
 		g2.drawString(Integer.toString(ID), X + 5, Y + 5);
+        
+        g2.setColor(defaultColor);
 	}
     
     public void addLink(Node dest)
@@ -73,5 +83,10 @@ public class Node extends JPanel
         if(y > 0)
     		Y = y;
 	}
+
+    public void setColor(Color color)
+    {
+        drawingColor = color;
+    }
 
 }

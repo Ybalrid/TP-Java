@@ -12,7 +12,11 @@ public class Link extends JPanel
     
     private boolean oriented = false;
 
-	Link(Node from, Node to)
+	
+    private Color defaultColor = Color.BLACK;
+    private Color drawingColor = null;
+
+    Link(Node from, Node to)
 	{
         System.out.println("Creating an ling from " + from.getID() + " to " + to.getID());
 		this.from = from;
@@ -24,6 +28,10 @@ public class Link extends JPanel
 	{   
         if(!oriented && from.getID() > to.getID()) return;
         Graphics2D g2 = (Graphics2D) g;
+        
+        if(drawingColor != null)
+            g2.setColor(drawingColor);
+
         g2.drawLine(from.x(), from.y(), to.x(), to.y());
 	}
 
@@ -35,5 +43,10 @@ public class Link extends JPanel
     public Node to()
     {
         return to;
+    }
+
+    public void setColor(Color color)
+    {
+        drawingColor = color;
     }
 }

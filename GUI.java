@@ -124,6 +124,11 @@ public class GUI extends JFrame
         {
             if(!graph.saveMenuAction())
             {
+            FileDialog fd = new FileDialog(parentFrameForDialog, "Save Graph as...", FileDialog.SAVE);
+            fd.setMultipleMode(false);
+            fd.setFile("*.graph");
+            fd.show();
+            graph.saveAsMenuAction(fd.getFile());
 
             }
         }        
