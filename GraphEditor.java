@@ -347,7 +347,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
             System.out.println("Something goes wrong here. null path ?");
             return;
         }
-        setFilePath(filePath);
+        setFilePath(Path);
         saveMenuAction();
     }
 

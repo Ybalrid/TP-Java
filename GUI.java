@@ -122,7 +122,10 @@ public class GUI extends JFrame
                 {
                     public void actionPerformed(ActionEvent arg0) 
         {
-            graph.saveMenuAction();
+            if(!graph.saveMenuAction())
+            {
+
+            }
         }        
         });
 
@@ -133,8 +136,10 @@ public class GUI extends JFrame
         {
             FileDialog fd = new FileDialog(parentFrameForDialog, "Save Graph as...", FileDialog.SAVE);
             fd.setMultipleMode(false);
+            fd.setFile("*.graph");
             fd.show();
             graph.saveAsMenuAction(fd.getFile());
+
         }        
         });
 
@@ -144,6 +149,7 @@ public class GUI extends JFrame
         {
             FileDialog fd = new FileDialog(parentFrameForDialog, "Open Graph...", FileDialog.LOAD);
             fd.setMultipleMode(false);
+            fd.setFile("*.graph");
             fd.show();
             graph.openMenuAction(fd.getFile());
         }
