@@ -40,6 +40,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         addMouseMotionListener(this);
         f = new Font("Helvetica", Font.BOLD, 12);
         setVisible(true);
+		Algorithm engine = new Algorithm(NodeList);
     }
 
     ///Reset Node ID from their position in NodeList ArrayList
