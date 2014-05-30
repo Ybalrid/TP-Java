@@ -94,7 +94,8 @@ public class GUI extends JFrame
         algo.add(breadth_);
         algo.addSeparator();
         algo.add(djikstra_);
-        help.add(manual_);
+        
+		help.add(manual_);
         if(!isOnMac)   
             help.add(about_);
 
@@ -205,6 +206,7 @@ public class GUI extends JFrame
                 {
                     public void actionPerformed(ActionEvent arg0) 
         {
+			graph.setAlgoMode(0);
             graph.setEditorMode(0);
             setCursor(mainCurs);
         }        
@@ -215,6 +217,7 @@ public class GUI extends JFrame
                     public void actionPerformed(ActionEvent arg0) 
         {
             graph.setEditorMode(1);
+			graph.setAlgoMode(0);
             setCursor(moveCurs);
         }        
         });	
@@ -223,12 +226,22 @@ public class GUI extends JFrame
                 {
                     public void actionPerformed(ActionEvent arg0) 
         {
+			graph.setAlgoMode(0);
             graph.setEditorMode(2);
             setCursor(deleteCurs);
         }        
         });
 	
 	 // ----------------------- ALGORITHM SECTION -------------------------------
+
+        depth_.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent arg0) 
+        {			
+            setCursor(algoCurs);
+			graph.setAlgoMode(1);
+        }        
+        });
 
 	 // ----------------------- HELP SECTION -------------------------------
 
