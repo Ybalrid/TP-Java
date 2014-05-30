@@ -12,7 +12,9 @@ import java.io.*;
 public class AlgorithmDisplayer extends Thread
 {
 	private ArrayList<Node> NodeCp = null;
-    private long delay = 400; //ms
+    private long baseDelay = 100;
+	private long delay; //ms
+	private int multiplier = 3;
     private boolean state = false;
     private GraphEditor parent = null;
     private boolean animate = false;
@@ -43,9 +45,9 @@ public class AlgorithmDisplayer extends Thread
         animate = true;
     }
 
-    public void setDelay(long value)
+    public void setMultiplier(int value)
     {
-        delay = value;
+        multiplier = value;
     }
 
 	public void run() 
@@ -56,6 +58,7 @@ public class AlgorithmDisplayer extends Thread
             System.out.println("Child Thread started");
             while(true)
             {
+				delay = baseDelay * multiplier;
                 //System.out.println("Iterate");
                 this.sleep(delay);
                 refresh();

@@ -12,7 +12,8 @@ public class Node extends JPanel
 	private int ID;
 	private int X;
 	private int Y;
-    
+    private int Xpoints[] = new int[3];
+	private int Ypoints[] = new int[3];
     private Color defaultColor = Color.BLACK;
     
     private Color drawingColor = null;
@@ -29,6 +30,7 @@ public class Node extends JPanel
 	
 	public void paint(Graphics g)
 	{
+		
         Graphics2D g2 = (Graphics2D) g;
         //Draw node point
 

@@ -99,8 +99,8 @@ public class AlgorithmRunner
 		algoDisp.show();
 	}
 
-	public void djisktra(Node startNode)
+	public int dijkstra(Node startNode)
 	{
-
+		return 0;
 	}	
 }

@@ -23,6 +23,9 @@ public class GUI extends JFrame
     JMenu help = new JMenu("Help");
     JMenu debug = new JMenu("Debug");
 
+	//Submenu for choosing animation speed.
+	JMenu speed_ = new JMenu("Animation Speed");
+
     //Creating the items displayed in File
     JMenuItem new_ = new JMenuItem("New");
     JMenuItem open_ = new JMenuItem("Open");
@@ -42,15 +45,21 @@ public class GUI extends JFrame
     //Creating the items displayed in Algorithms
     JMenuItem depth_ = new JMenuItem("Depth-First");
     JMenuItem breadth_ = new JMenuItem("Breadth-First");
-    JMenuItem djikstra_ = new JMenuItem("Djikstra");
+    JMenuItem dijkstra_ = new JMenuItem("Dijkstra");
 
     //Creating the items displayed in Help
     JMenuItem manual_ = new JMenuItem("Manual");
     JMenuItem about_ = new JMenuItem("About");		
 
     //Creating the items displayed in Debug
-    JMenuItem coloriseAllNodes_ = new JMenuItem("Colorise All Nodes");
+    //JMenuItem coloriseAllNodes_ = new JMenuItem("Colorise All Nodes");
 
+	//Creating the items displayed in Animation Speed submenu.
+	JRadioButtonMenuItem ufast_ = new JRadioButtonMenuItem("Ultra Fast");
+	JRadioButtonMenuItem fast_ = new JRadioButtonMenuItem("Fast");
+	JRadioButtonMenuItem normal_ = new JRadioButtonMenuItem("Normal");
+	JRadioButtonMenuItem slow_ = new JRadioButtonMenuItem("Slow");
+	JRadioButtonMenuItem uslow_ = new JRadioButtonMenuItem("Ultra Slow");
 
     GraphEditor graph = new GraphEditor();
 
@@ -85,6 +94,13 @@ public class GUI extends JFrame
 
         edit.add(clear_);
 		edit.add(reset_);
+		edit.add(speed_);
+
+		speed_.add(ufast_);
+		speed_.add(fast_);
+		speed_.add(normal_);
+		speed_.add(slow_);
+		speed_.add(uslow_);
 
         tools.add(add_);
         tools.add(move_);
@@ -93,13 +109,13 @@ public class GUI extends JFrame
         algo.add(depth_);
         algo.add(breadth_);
         algo.addSeparator();
-        algo.add(djikstra_);
+        algo.add(dijkstra_);
         
 		help.add(manual_);
         if(!isOnMac)   
             help.add(about_);
 
-        debug.add(coloriseAllNodes_);
+        //debug.add(coloriseAllNodes_);
         setVisible(true);//Show the window THEN add the menu bar
 
         menuBar.add(file);
@@ -107,7 +123,7 @@ public class GUI extends JFrame
         menuBar.add(tools);
         menuBar.add(algo);
         menuBar.add(help);
-        menuBar.add(debug);
+        //menuBar.add(debug);
         setJMenuBar(menuBar);
 
 
@@ -198,7 +214,60 @@ public class GUI extends JFrame
             temp = graph.getADisp();
 			temp.clearDisp();
         }        
-        });		
+        });
+	
+					//---ANIMATION SPEED SUBSECTION---
+
+		ufast_.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent arg0) 
+        {
+			AlgorithmDisplayer temp = null;
+            temp = graph.getADisp();
+			temp.setMultiplier(1);
+        }        
+        });
+		
+		fast_.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent arg0) 
+        {
+			AlgorithmDisplayer temp = null;
+            temp = graph.getADisp();
+			temp.setMultiplier(2);
+        }        
+        });
+
+		normal_.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent arg0) 
+        {
+			AlgorithmDisplayer temp = null;
+            temp = graph.getADisp();
+			temp.setMultiplier(3);
+        }        
+        });
+
+		slow_.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent arg0) 
+        {
+			AlgorithmDisplayer temp = null;
+            temp = graph.getADisp();
+			temp.setMultiplier(4);
+        }        
+        });
+
+		uslow_.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent arg0) 
+        {
+			AlgorithmDisplayer temp = null;
+            temp = graph.getADisp();
+			temp.setMultiplier(5);
+        }        
+        });
+				
 
 	 // ----------------------- TOOLS SECTION -------------------------------
 
@@ -256,13 +325,13 @@ public class GUI extends JFrame
 
 	 // ----------------------- DEBUG SECTION -------------------------------
 
-        coloriseAllNodes_.addActionListener(new ActionListener()
+        /*coloriseAllNodes_.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent arg0) 
         {
             graph.testAlgoDisp();
         }        
-        });	
+        });	*/
     }
 
     public void paint(Graphics g)
