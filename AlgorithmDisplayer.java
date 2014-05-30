@@ -32,6 +32,7 @@ public class AlgorithmDisplayer extends Thread
 
     public void show()
     {
+        clearDisp();
         animate = true;
     }
 
