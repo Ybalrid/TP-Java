@@ -32,6 +32,7 @@ public class AlgorithmDisplayer extends Thread
 
     public void show()
     {
+        clearDisp();
         animate = true;
     }
 
@@ -75,7 +76,6 @@ public class AlgorithmDisplayer extends Thread
             if(displayQueue.isEmpty())
             {
                 animate = false;
-                clearDisp();
             }
             else
             {
