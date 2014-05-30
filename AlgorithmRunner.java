@@ -97,5 +97,8 @@ public class AlgorithmRunner
 		algoDisp.show();
 	}
 
-	
+	public void djisktra(Node startNode)
+	{
+
+	}	
 }
