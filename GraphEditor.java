@@ -292,7 +292,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
                         	linkOrigin.addLink(linkDest,true);
 							
 							if(!orientedMode)
-	                            linkDest.addLink(linkOrigin, true); //Add the reverse link.
+	                            linkDest.addLink(linkOrigin, false); //Add the reverse link.
 						}
 
 						else

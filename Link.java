@@ -10,7 +10,7 @@ public class Link extends JPanel
 	private Node from;
 	private Node to;
     
-    private boolean oriented = false;
+    private boolean oriented = true;
     private boolean valuated = false;
     private int value = 1;
 	
