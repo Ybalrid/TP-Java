@@ -73,23 +73,21 @@ public class AlgorithmRunner
 		ArrayList<Link> tmpLink = startNode.getLinks();		
 
 		nodeQueue.add(startNode);
-		System.out.println("Debug 1");
 		
 		while(nodeQueue.peek() != null)
 		{
 			current = nodeQueue.remove();
 			trace[current.getID()] = true;
 			algoDisp.addToDisplayQueue(current);
-			System.out.println("Debug 2");
+
+			tmpLink = current.getLinks();
 
 			for(Link linkIterator : tmpLink)
 			{
 				next = linkIterator.to();
-				System.out.println("Debug 3");
 
 					if(trace[next.getID()] == false)
 					{
-						System.out.println("Debug 4");
 						nodeQueue.add(next);
 						trace[next.getID()] = true;
 					}
