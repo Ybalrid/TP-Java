@@ -18,6 +18,9 @@ public class Node extends JPanel
     
     private Color drawingColor = null;
 
+    boolean visited = false;
+    int value = 0;
+
 	//Class constructor
 	Node(int X, int Y, int ID)
 	{

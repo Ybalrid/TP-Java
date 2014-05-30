@@ -98,16 +98,80 @@ public class AlgorithmRunner
 
 		algoDisp.show();
 	}
+    
+    private void initDijkstra()
+    {
+        for (int i = 0; i < nodes.size(); i++)
+        {
+            nodes.get(i).visited = false;
+            nodes.get(i).value = -1; //represent infinite;
+        }
 
-	public int dijkstra(Node startNode)
+    }
+    
+
+    
+    private ArrayList<Node> getChildList(Node n)
+    {
+        ArrayList<Node> childs = new ArrayList<Node>();
+
+        for(Link l : n.getLinks())
+            childs.add(l.to());
+
+        return childs;
+    }
+
+    private int distanceMin(int a, int b)
+    {
+        //-1 represent infinite distance
+        if(a == -1) return b;
+        if(b == -1) return a;
+
+        if(a < b) return a; 
+        return b;
+    }
+
+    private Node getAnUnvisitedNode(ArrayList<Node> list)
+    {
+        for(Node n : list)
+            if(!n.visited)
+                return n;
+        return null;
+    }
+
+    private boolean stillUnvisitedNode(ArrayList<Node> list)
+    {
+        for(Node n : list)
+            if(!n.visited)
+                return true;
+        return false;
+    }
+
+    private int getValueBetweenNode(Node from, Node to)
+    {
+        for(Link l : from.getLinks())
+            if(l.to() == to)
+                return l.getValue();
+        return -1;
+    }
+	public int dijkstra(Node startNode, Node endNode)
 	{
-		int distance[] = new int[nodes.size()];
+        initDijkstra();
 
-		for(int i = 0; i < nodes.size(); i++)
-		{
-			distance[i] = 1000000000; //Set base distance to 1.000.000.000 (1 bilion) to aproximate infinite distance.
-		}						
+        while(stillUnvisitedNode(nodes))
+        {
+            if(stillUnvisitedNode(getChildList(startNode)))
+            {
+                Node n = getAnUnvisitedNode(getChildList(startNode));
+                n.value = distanceMin(n.value, getValueBetweenNode(startNode,n));
+            }
+            else
+            {
+                startNode.visited = true;
+            }
+        }
+        return 0;
+    }
 
-		return 0;
-	}	
+
 }
