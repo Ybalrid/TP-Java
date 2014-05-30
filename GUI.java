@@ -57,7 +57,7 @@ public class GUI extends JFrame
 	//Creating the items displayed in Animation Speed submenu.
 	JRadioButtonMenuItem ufast_ = new JRadioButtonMenuItem("Ultra Fast");
 	JRadioButtonMenuItem fast_ = new JRadioButtonMenuItem("Fast");
-	JRadioButtonMenuItem normal_ = new JRadioButtonMenuItem("Normal");
+	JRadioButtonMenuItem normal_ = new JRadioButtonMenuItem("Normal", true);
 	JRadioButtonMenuItem slow_ = new JRadioButtonMenuItem("Slow");
 	JRadioButtonMenuItem uslow_ = new JRadioButtonMenuItem("Ultra Slow");
 
@@ -126,6 +126,60 @@ public class GUI extends JFrame
         //menuBar.add(debug);
         setJMenuBar(menuBar);
 
+	// ----------------------- SHORTCUTS SECTION -------------------------------
+
+			//---File Subsection---
+		new_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_N,  KeyEvent.CTRL_MASK + KeyEvent.SHIFT_MASK));
+
+		open_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+
+		save_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+		
+		save_as_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_N, KeyEvent.CTRL_MASK + KeyEvent.SHIFT_MASK));
+
+		quit_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_Q, KeyEvent.CTRL_MASK + KeyEvent.SHIFT_MASK));
+
+			//---Edit Subsection---
+
+		clear_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_C, KeyEvent.CTRL_MASK + KeyEvent.SHIFT_MASK));
+		
+		reset_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_R, KeyEvent.CTRL_MASK));
+			
+				//--Animation Speed Sub-Subsection--
+		/*plus_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_PLUS, KeyEvent.CTRL_MASK));*/
+
+		/*minus_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_MINUS, KeyEvent.CTRL_MASK));*/
+		
+			//---Tools Subsection---
+
+		add_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_A, KeyEvent.CTRL_MASK));
+		
+		move_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_M, KeyEvent.CTRL_MASK));
+
+		delete_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_D, KeyEvent.CTRL_MASK));
+
+			//---Algorithms Subsection---
+
+		depth_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_D, KeyEvent.ALT_MASK));
+		
+		breadth_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_B, KeyEvent.ALT_MASK));
+
+		dijkstra_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_D, KeyEvent.ALT_MASK + KeyEvent.SHIFT_MASK));		
 
         /************ACTION LISTENERS FOR THE MENU ITEMS******************/
         /*this.addComponentListener(new ComponentAdapter() 
@@ -322,6 +376,22 @@ public class GUI extends JFrame
         });
 
 	 // ----------------------- HELP SECTION -------------------------------
+
+		manual_.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent arg0) 
+        {			
+			JOptionPane.showMessageDialog(null,"For more informations about how to run this program\ncheck the README.txt file.");
+        }        
+        });
+
+		about_.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent arg0) 
+        {			
+			JOptionPane.showMessageDialog(null,"This program has been created by :\n Arthur Brainville & Thomas Thous.");
+        }        
+        });
 
 	 // ----------------------- DEBUG SECTION -------------------------------
 

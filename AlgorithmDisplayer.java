@@ -50,6 +50,11 @@ public class AlgorithmDisplayer extends Thread
         multiplier = value;
     }
 
+	public int getMultiplier()
+	{
+		return multiplier;
+	}
+
 	public void run() 
     {
         try
