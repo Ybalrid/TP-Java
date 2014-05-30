@@ -75,7 +75,6 @@ public class AlgorithmDisplayer extends Thread
             if(displayQueue.isEmpty())
             {
                 animate = false;
-                clearDisp();
             }
             else
             {
