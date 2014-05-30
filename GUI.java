@@ -23,6 +23,9 @@ public class GUI extends JFrame
     JMenu help = new JMenu("Help");
     JMenu debug = new JMenu("Debug");
 
+	//Submenu for choosing animation speed.
+	JMenu speed_ = new JMenu("Animation Speed");
+
     //Creating the items displayed in File
     JMenuItem new_ = new JMenuItem("New");
     JMenuItem open_ = new JMenuItem("Open");
@@ -42,15 +45,21 @@ public class GUI extends JFrame
     //Creating the items displayed in Algorithms
     JMenuItem depth_ = new JMenuItem("Depth-First");
     JMenuItem breadth_ = new JMenuItem("Breadth-First");
-    JMenuItem djikstra_ = new JMenuItem("Djikstra");
+    JMenuItem dijkstra_ = new JMenuItem("Dijkstra");
 
     //Creating the items displayed in Help
     JMenuItem manual_ = new JMenuItem("Manual");
     JMenuItem about_ = new JMenuItem("About");		
 
     //Creating the items displayed in Debug
-    JMenuItem coloriseAllNodes_ = new JMenuItem("Colorise All Nodes");
+    //JMenuItem coloriseAllNodes_ = new JMenuItem("Colorise All Nodes");
 
+	//Creating the items displayed in Animation Speed submenu.
+	JRadioButtonMenuItem ufast_ = new JRadioButtonMenuItem("Ultra Fast");
+	JRadioButtonMenuItem fast_ = new JRadioButtonMenuItem("Fast");
+	JRadioButtonMenuItem normal_ = new JRadioButtonMenuItem("Normal", true);
+	JRadioButtonMenuItem slow_ = new JRadioButtonMenuItem("Slow");
+	JRadioButtonMenuItem uslow_ = new JRadioButtonMenuItem("Ultra Slow");
 
     GraphEditor graph = new GraphEditor();
 
@@ -85,6 +94,13 @@ public class GUI extends JFrame
 
         edit.add(clear_);
 		edit.add(reset_);
+		edit.add(speed_);
+
+		speed_.add(ufast_);
+		speed_.add(fast_);
+		speed_.add(normal_);
+		speed_.add(slow_);
+		speed_.add(uslow_);
 
         tools.add(add_);
         tools.add(move_);
@@ -93,13 +109,13 @@ public class GUI extends JFrame
         algo.add(depth_);
         algo.add(breadth_);
         algo.addSeparator();
-        algo.add(djikstra_);
+        algo.add(dijkstra_);
         
 		help.add(manual_);
         if(!isOnMac)   
             help.add(about_);
 
-        debug.add(coloriseAllNodes_);
+        //debug.add(coloriseAllNodes_);
         setVisible(true);//Show the window THEN add the menu bar
 
         menuBar.add(file);
@@ -107,9 +123,63 @@ public class GUI extends JFrame
         menuBar.add(tools);
         menuBar.add(algo);
         menuBar.add(help);
-        menuBar.add(debug);
+        //menuBar.add(debug);
         setJMenuBar(menuBar);
 
+	// ----------------------- SHORTCUTS SECTION -------------------------------
+
+			//---File Subsection---
+		new_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_N,  KeyEvent.CTRL_MASK + KeyEvent.SHIFT_MASK));
+
+		open_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+
+		save_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+		
+		save_as_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_N, KeyEvent.CTRL_MASK + KeyEvent.SHIFT_MASK));
+
+		quit_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_Q, KeyEvent.CTRL_MASK + KeyEvent.SHIFT_MASK));
+
+			//---Edit Subsection---
+
+		clear_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_C, KeyEvent.CTRL_MASK + KeyEvent.SHIFT_MASK));
+		
+		reset_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_R, KeyEvent.CTRL_MASK));
+			
+				//--Animation Speed Sub-Subsection--
+		/*plus_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_PLUS, KeyEvent.CTRL_MASK));*/
+
+		/*minus_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_MINUS, KeyEvent.CTRL_MASK));*/
+		
+			//---Tools Subsection---
+
+		add_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_A, KeyEvent.CTRL_MASK));
+		
+		move_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_M, KeyEvent.CTRL_MASK));
+
+		delete_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_D, KeyEvent.CTRL_MASK));
+
+			//---Algorithms Subsection---
+
+		depth_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_D, KeyEvent.ALT_MASK));
+		
+		breadth_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_B, KeyEvent.ALT_MASK));
+
+		dijkstra_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_D, KeyEvent.ALT_MASK + KeyEvent.SHIFT_MASK));		
 
         /************ACTION LISTENERS FOR THE MENU ITEMS******************/
         /*this.addComponentListener(new ComponentAdapter() 
@@ -198,7 +268,60 @@ public class GUI extends JFrame
             temp = graph.getADisp();
 			temp.clearDisp();
         }        
-        });		
+        });
+	
+					//---ANIMATION SPEED SUBSECTION---
+
+		ufast_.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent arg0) 
+        {
+			AlgorithmDisplayer temp = null;
+            temp = graph.getADisp();
+			temp.setMultiplier(1);
+        }        
+        });
+		
+		fast_.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent arg0) 
+        {
+			AlgorithmDisplayer temp = null;
+            temp = graph.getADisp();
+			temp.setMultiplier(2);
+        }        
+        });
+
+		normal_.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent arg0) 
+        {
+			AlgorithmDisplayer temp = null;
+            temp = graph.getADisp();
+			temp.setMultiplier(3);
+        }        
+        });
+
+		slow_.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent arg0) 
+        {
+			AlgorithmDisplayer temp = null;
+            temp = graph.getADisp();
+			temp.setMultiplier(4);
+        }        
+        });
+
+		uslow_.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent arg0) 
+        {
+			AlgorithmDisplayer temp = null;
+            temp = graph.getADisp();
+			temp.setMultiplier(5);
+        }        
+        });
+				
 
 	 // ----------------------- TOOLS SECTION -------------------------------
 
@@ -254,15 +377,31 @@ public class GUI extends JFrame
 
 	 // ----------------------- HELP SECTION -------------------------------
 
+		manual_.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent arg0) 
+        {			
+			JOptionPane.showMessageDialog(null,"For more informations about how to run this program\ncheck the README.txt file.");
+        }        
+        });
+
+		about_.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent arg0) 
+        {			
+			JOptionPane.showMessageDialog(null,"This program has been created by :\n Arthur Brainville & Thomas Thous.");
+        }        
+        });
+
 	 // ----------------------- DEBUG SECTION -------------------------------
 
-        coloriseAllNodes_.addActionListener(new ActionListener()
+        /*coloriseAllNodes_.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent arg0) 
         {
             graph.testAlgoDisp();
         }        
-        });	
+        });	*/
     }
 
     public void paint(Graphics g)

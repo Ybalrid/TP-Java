@@ -12,7 +12,7 @@ public class Link extends JPanel
     
     private boolean oriented = false;
     private boolean valuated = false;
-    private int value = 0;
+    private int value = 1;
 	
     private Color defaultColor = Color.BLACK;
     private Color drawingColor = null;

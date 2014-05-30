@@ -99,5 +99,8 @@ public class AlgorithmRunner
 		algoDisp.show();
 	}
 
-	
+	public int dijkstra(Node startNode)
+	{
+		return 0;
+	}	
 }
