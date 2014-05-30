@@ -10,12 +10,15 @@ public class Link extends JPanel
 	private Node from;
 	private Node to;
     
-    private boolean oriented = true;
+    private boolean oriented = false;
     private boolean valuated = false;
     private int value = 1;
 	
     private Color defaultColor = Color.BLACK;
     private Color drawingColor = null;
+
+	int Xpoints[] = new int[3];
+	int Ypoints[] = new int[3];
 
 	//Class contructor
     Link(Node from, Node to)
@@ -29,6 +32,27 @@ public class Link extends JPanel
 
 	public void paint(Graphics g)
 	{   
+		int X = to.x();
+		int Y = to.y();
+
+		int aX = from.x();
+		int aY = from.y();
+
+		int medX = aX + X - 5;
+		int medY = aY + Y - 5;
+
+		//System.out.println("Variable X : " + X + " Y :" + Y);
+
+		Xpoints[0] = X;
+		Ypoints[0] = Y;
+
+		Xpoints[1] = aX + 5 ;
+		Ypoints[1] = aY + 5;
+		
+		Xpoints[2] = aX - 5;
+		Ypoints[2] = aY - 5;
+
+			
         if(!oriented && from.getID() > to.getID()) return;
         Graphics2D g2 = (Graphics2D) g;
         
@@ -36,7 +60,9 @@ public class Link extends JPanel
             g2.setColor(drawingColor);
 
         g2.drawLine(from.x(), from.y(), to.x(), to.y());
-
+		
+		//g2.fillPolygon(Xpoints, Ypoints,3);		
+			
         if(valuated)
         { 
             g2.setColor(Color.BLUE);
