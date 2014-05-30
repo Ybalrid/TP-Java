@@ -285,7 +285,7 @@ public class GUI extends JFrame
                 if(e.getStateChange() == ItemEvent.SELECTED)
 					graph.setValuated(true);
 				
-				else if(e.getStateChange() == ItemEvent.SELECTED)
+				else if(e.getStateChange() == ItemEvent.DESELECTED)
 					graph.setValuated(false);
                     
         }

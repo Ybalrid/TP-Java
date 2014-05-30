@@ -35,8 +35,8 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
     private Node linkDest = null;
 
 
-    //Set if the next user drawn Link will be An oriented one. false by default.
-    private boolean orientedMode = false;
+    //Set if the next user drawn Link will be An oriented one. true by default.
+    private boolean orientedMode = true;
 	private boolean valuatedMode = false;
     private boolean draggNode = false;
     private Node draggedNode = null;

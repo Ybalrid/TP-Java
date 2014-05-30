@@ -42,6 +42,8 @@ public class Node extends JPanel
 		g2.drawString(Integer.toString(ID), X + 5, Y + 5);
         
         g2.setColor(defaultColor);
+		
+		
 	}
     
     public void addLink(Node dest, boolean valuated)
