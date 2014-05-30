@@ -30,3 +30,10 @@ Pour effacer les couleurs de trace des algo, faites edit->reset.
 Pour efface le graphe, faites un edit-> clear.
 
 Des racourci claviers sont disponibles dans le menu à coté du nom des options
+
+Exemples :
+
+- stage.graph est un graphe basique avec une structure type arbre, un parcours en largeur donnera le parcours suivant (0,1,2,3,4,5,6,13,14,15,7,8,9,10,11,12,16,17,18) et un parcours en profondeur le résultat suivant (0,1,4,7,8,5,9,10,6,11,12,2,13,14,3,15,16,17,18)
+
+-USA.graph est un graphe plus complexe, il est vivement conseillé de lancer la simulation en vitesse Ultra Fast.
+
