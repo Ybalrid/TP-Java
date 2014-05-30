@@ -17,6 +17,7 @@ public class Link extends JPanel
     private Color defaultColor = Color.BLACK;
     private Color drawingColor = null;
 
+	//Class contructor
     Link(Node from, Node to)
 	{
         System.out.println("Creating an ling from " + from.getID() + " to " + to.getID());
@@ -24,6 +25,7 @@ public class Link extends JPanel
 		this.to = to;
 	}
 
+	// ----------------------- SOME METHODS-------------------------------	
 
 	public void paint(Graphics g)
 	{   
@@ -44,6 +46,8 @@ public class Link extends JPanel
         g2.setColor(defaultColor);
 
 	}
+
+	// ----------------------- GETTERS AND SETTERS -------------------------------
 
     public Node from()
     {

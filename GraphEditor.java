@@ -37,6 +37,8 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
     AlgorithmDisplayer algoDisp = null;
     AlgorithmRunner algoRun = null;
+
+	//Class constructor
     public GraphEditor()
     {
         addMouseListener(this);
@@ -49,6 +51,20 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
         algoRun = new AlgorithmRunner(algoDisp,NodeList);
     }
+
+	 // ----------------------- GETTERS AND SETTERS -------------------------------
+	public AlgorithmDisplayer getADisp()
+	{
+		return algoDisp;
+	}
+
+	public AlgorithmRunner getARun()
+	{
+		return algoRun;
+	}
+
+
+	 // ----------------------- SOME METHODS -------------------------------
 
     public void testAlgoDisp()
     {
@@ -319,7 +335,6 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         int y = e.getY();
 
     }
-
 
     // ----------------------- FILE MANAGER INTERFACE -------------------------------  
 

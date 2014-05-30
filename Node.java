@@ -17,6 +17,7 @@ public class Node extends JPanel
     
     private Color drawingColor = null;
 
+	//Class constructor
 	Node(int X, int Y, int ID)
 	{
 		this.X = X;
@@ -24,6 +25,8 @@ public class Node extends JPanel
 		this.ID = ID;
 	}
 
+	// ----------------------- SOME METHODS-------------------------------	
+	
 	public void paint(Graphics g)
 	{
         Graphics2D g2 = (Graphics2D) g;
@@ -44,6 +47,8 @@ public class Node extends JPanel
         System.out.println("adding link");
         LinkList.add(new Link (this, dest));
     }
+
+	// ----------------------- GETTERS AND SETTERS -------------------------------
 
     public ArrayList<Link> getLinks()
     {
