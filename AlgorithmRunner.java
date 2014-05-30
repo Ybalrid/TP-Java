@@ -20,4 +20,25 @@ public class AlgorithmRunner
         nodes = NodeList;
         algoDisp = ad;
     }
+
+	public void DepthFirst_(Node startNode)
+	{
+		boolean trace[] = new boolean[nodes.size()];
+		
+		trace[startNode.getID()] = true;
+		algoDisp.addToDisplayQueue(startNode);	
+		
+		//Launch display when every Nodes have been visited.
+		algoDisp.show();
+	}
+
+	public void DepthFirst(boolean trace[], Node startNode)
+	{
+		
+	}
+
+	public void BreadthFirst()
+	{
+		boolean trace[] = new boolean[nodes.size()];
+	}
 }

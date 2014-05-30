@@ -32,6 +32,7 @@ public class GUI extends JFrame
 
     //Creating the items displayed in Edit
     JMenuItem clear_ = new JMenuItem("Clear");
+	JMenuItem reset_ = new JMenuItem("Reset");
 
     //Creating the items displayed in Tools
     JMenuItem add_ = new JMenuItem("Add");
@@ -49,6 +50,7 @@ public class GUI extends JFrame
 
     //Creating the items displayed in Debug
     JMenuItem coloriseAllNodes_ = new JMenuItem("Colorise All Nodes");
+
 
     GraphEditor graph = new GraphEditor();
 
@@ -82,6 +84,7 @@ public class GUI extends JFrame
         }
 
         edit.add(clear_);
+		edit.add(reset_);
 
         tools.add(add_);
         tools.add(move_);
@@ -91,7 +94,8 @@ public class GUI extends JFrame
         algo.add(breadth_);
         algo.addSeparator();
         algo.add(djikstra_);
-        help.add(manual_);
+        
+		help.add(manual_);
         if(!isOnMac)   
             help.add(about_);
 
@@ -115,6 +119,8 @@ public class GUI extends JFrame
 
           }
           });*/
+
+	 // ----------------------- FILE SECTION -------------------------------
         new_.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent arg0) 
@@ -174,18 +180,33 @@ public class GUI extends JFrame
         }        
         });
 
+	 // ----------------------- EDIT SECTION -------------------------------
+
         clear_.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent arg0) 
         {
             graph.clear();
         }        
-        });	
+        });
+
+		reset_.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent arg0) 
+        {
+			AlgorithmDisplayer temp = null;
+            temp = graph.getADisp();
+			temp.clearDisp();
+        }        
+        });		
+
+	 // ----------------------- TOOLS SECTION -------------------------------
 
         add_.addActionListener(new ActionListener()
                 {
                     public void actionPerformed(ActionEvent arg0) 
         {
+			graph.setAlgoMode(0);
             graph.setEditorMode(0);
             setCursor(mainCurs);
         }        
@@ -196,6 +217,7 @@ public class GUI extends JFrame
                     public void actionPerformed(ActionEvent arg0) 
         {
             graph.setEditorMode(1);
+			graph.setAlgoMode(0);
             setCursor(moveCurs);
         }        
         });	
@@ -204,12 +226,26 @@ public class GUI extends JFrame
                 {
                     public void actionPerformed(ActionEvent arg0) 
         {
+			graph.setAlgoMode(0);
             graph.setEditorMode(2);
             setCursor(deleteCurs);
         }        
         });
+	
+	 // ----------------------- ALGORITHM SECTION -------------------------------
 
+        depth_.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent arg0) 
+        {			
+            setCursor(algoCurs);
+			graph.setAlgoMode(1);
+        }        
+        });
 
+	 // ----------------------- HELP SECTION -------------------------------
+
+	 // ----------------------- DEBUG SECTION -------------------------------
 
         coloriseAllNodes_.addActionListener(new ActionListener()
                 {

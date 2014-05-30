@@ -15,12 +15,20 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
     Font f;
 
     private ArrayList<Node> NodeList = new ArrayList<Node>();
-    private int editorMode = 0;
+    
 
-    //Editor mode descriptor : 
+	private int editorMode = 0;
+	//Editor mode descriptor : 
     // 0 = Add
     // 1 = Move
     // 2 = Delete
+
+	private int algoMode = 0;
+	//Algo mode descriptor : 
+    // 0 = None
+    // 1 = DepthFirst
+    // 2 = BreadthFirst
+	// 3 = Djisktra
 
     private int ID = 0;	
 
@@ -37,6 +45,8 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
     AlgorithmDisplayer algoDisp = null;
     AlgorithmRunner algoRun = null;
+
+	//Class constructor
     public GraphEditor()
     {
         addMouseListener(this);
@@ -49,6 +59,29 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
         algoRun = new AlgorithmRunner(algoDisp,NodeList);
     }
+
+	 // ----------------------- GETTERS AND SETTERS -------------------------------
+	public AlgorithmDisplayer getADisp()
+	{
+		return algoDisp;
+	}
+
+	public AlgorithmRunner getARun()
+	{
+		return algoRun;
+	}
+
+    public void setEditorMode(int mode)
+    {
+        editorMode = mode;
+    }
+
+	public void setAlgoMode(int mode)
+	{
+		algoMode = mode;
+	}
+
+	 // ----------------------- SOME METHODS -------------------------------
 
     public void testAlgoDisp()
     {
@@ -146,11 +179,6 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         return Math.sqrt((target.x()-x)*(target.x()-x) + (target.y()-y)*(target.y()-y));
     }
 
-
-    public void setEditorMode(int mode)
-    {
-        editorMode = mode;
-    }
     // ----------------------- MOUSE LISTENER -------------------------------
 
     public void mouseClicked(MouseEvent e)
@@ -162,47 +190,57 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         {
 
             Node closestNode = getClosest(x,y);
-            if(editorMode == 2)//The rather ugly chunk of code that erase a Node.
-            {
 
-                if(closestNode != null)
-                {
-                    if(getDistance(closestNode, x, y) <= 10)
-                    {
+			if(algoMode == 0)
+			{		
+         	   if(editorMode == 2)//The rather ugly chunk of code that erase a Node.
+            	{
 
-                        for(Link link : closestNode.getLinks())
-                        {
-                            Node node_to = link.to();
-                            //                        for(Link link_to : node_to.getLinks())
-                            for(int i = 0; i < node_to.getLinks().size(); i++) 
-                            {
-                                Link link_to = node_to.getLinks().get(i);
-                                if(link_to.to() == closestNode)
-                                {
-                                    node_to.getLinks().remove(link_to);
-                                }
-                            }
-                        }
-                        NodeList.remove(closestNode);
-                        reIndex(); //only moment it's usefull
-                        ID = NodeList.size();
-                        repaint();
-                        return;
-                    }
-                }
-            }
-            if(editorMode == 0)
-            {	
-                if(closestNode != null)	
-                {
-                    if(getDistance(closestNode, x, y) >= 30)
-                        NodeList.add(new Node(x,y,ID++));
-                }
-                else
-                    NodeList.add(new Node(x,y,ID++));
-            }
-            repaint();
-        }
+            	    if(closestNode != null)
+            	    {
+            	        if(getDistance(closestNode, x, y) <= 10)
+            	        {
+	
+            	            for(Link link : closestNode.getLinks())
+            	            {
+            	                Node node_to = link.to();
+            	                //                        for(Link link_to : node_to.getLinks())
+            	                for(int i = 0; i < node_to.getLinks().size(); i++) 
+            	                {
+            	                    Link link_to = node_to.getLinks().get(i);
+            	                    if(link_to.to() == closestNode)
+            	                    {
+            	                        node_to.getLinks().remove(link_to);
+            	                    }
+            	                }
+            	            }
+            	            NodeList.remove(closestNode);
+            	            reIndex(); //only moment it's usefull
+            	            ID = NodeList.size();
+            	            repaint();
+            	            return;
+            	        }
+            	    }
+            	}
+            	if(editorMode == 0)
+            	{	
+            	    if(closestNode != null)	
+            	    {
+            	        if(getDistance(closestNode, x, y) >= 30)
+            	            NodeList.add(new Node(x,y,ID++));
+            	    }
+            	    else
+            	        NodeList.add(new Node(x,y,ID++));
+            	}
+            	repaint();
+        	}
+			
+			else if(algoMode == 1)
+			{
+				if(getDistance(closestNode, x, y) <= 10)
+					algoRun.DepthFirst_(closestNode);
+			}
+		}
     }
 
     public void mouseExited(MouseEvent e)
@@ -216,7 +254,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
     public void mouseReleased(MouseEvent e)
     { 
         System.out.println("Released");
-        if(e.getButton() == 1 && editorMode == 0)
+        if(e.getButton() == 1 && editorMode == 0 && algoMode == 0)
         {
             System.out.println("Button 1");
             int x = e.getX();
@@ -263,7 +301,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         {
             System.out.println("Button 1");
 
-            if(editorMode == 1)
+            if(editorMode == 1 && algoMode == 0)
             {
                 System.out.println("Middle click button");
                 System.out.println("Dragged on " + x + "x" + y); 
@@ -279,7 +317,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
             System.out.println("Pos : " + x + "x" + y);
 
-            if(editorMode == 0)
+            if(editorMode == 0 && algoMode == 0)
             {
                 linkOrigin = getClosest(x,y);
 
@@ -299,7 +337,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
         //System.out.println("mouseDragged");
 
-        if(editorMode == 1)
+        if(editorMode == 1 && algoMode == 0)
         {
             if(draggedNode != null)
                 if(draggNode)
@@ -319,7 +357,6 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         int y = e.getY();
 
     }
-
 
     // ----------------------- FILE MANAGER INTERFACE -------------------------------  
 
