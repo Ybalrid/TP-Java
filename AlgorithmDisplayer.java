@@ -87,18 +87,20 @@ public class AlgorithmDisplayer extends Thread
             else
             {
                 Node nextNode = displayQueue.remove();
-                nextNode.setColor(Color.RED);
+                System.out.println("Node " + nextNode.getID());
+                nextNode.setColor(Color.GREEN);
                 if(lastNode != null)
                 {
+                    lastNode.setColor(Color.RED);
                     boolean Oriented = false;
                     for(int i = 0; i < lastNode.getLinks().size(); i++)
                     {
                         if(lastNode.getLinks().get(i).to() == nextNode)
                             lastNode.getLinks().get(i).setColor(Color.RED);
-                        Oriented = lastNode.getLinks().get(i).isOriented();
+                     //   Oriented = lastNode.getLinks().get(i).isOriented();
                     }
 
-                    if(!Oriented)
+                //    if(!Oriented)
                     for(int i = 0; i < nextNode.getLinks().size(); i++)
                     {
                         if(nextNode.getLinks().get(i).to() == lastNode)

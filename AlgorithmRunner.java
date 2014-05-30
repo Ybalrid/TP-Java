@@ -38,8 +38,9 @@ public class AlgorithmRunner
 		for(Link linkIterator : tmpLink)
 		{
 			DepthFirst(trace, linkIterator.to());
+		    algoDisp.addToDisplayQueue(startNode);	
 		}
-	
+		
 		//Launch display when every Nodes have been visited.
 		algoDisp.show();
 	}
@@ -58,6 +59,7 @@ public class AlgorithmRunner
 		for(Link linkIterator : tmpLink)
 		{
 			DepthFirst(trace, linkIterator.to());
+		    algoDisp.addToDisplayQueue(startNode);
 		}
 		
 	}
