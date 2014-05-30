@@ -80,11 +80,18 @@ public class Link extends JPanel
         oriented = state;
     }
 
-    public void setValuated(boolean state)
+    public void setValuated()
     {
-        valuated = state;
+        valuated = true;
+		value = Integer.parseInt(JOptionPane.showInputDialog("Enter a value :"));
     }
 
+	public void setUnvaluated(boolean state)
+	{
+		valuated = false;
+		value = 1;
+	}
+	
     public boolean isValuated()
     {
         return valuated;

@@ -77,8 +77,8 @@ public class FileManager
                     r = s.nextInt();
                     Node to = readingList.get(r);
 
-                    to.addLink(from);
-                    from.addLink(to);
+                    to.addLink(from, false);
+                    from.addLink(to, false);
 
                     continue;
                 }

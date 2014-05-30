@@ -14,9 +14,8 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
     Font f;
 
-    private ArrayList<Node> NodeList = new ArrayList<Node>();
-    
-
+    private ArrayList<Node> NodeList = new ArrayList<Node>();    
+	
 	private int editorMode = 0;
 	//Editor mode descriptor : 
     // 0 = Add
@@ -38,7 +37,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
     //Set if the next user drawn Link will be An oriented one. false by default.
     private boolean orientedMode = false;
-
+	private boolean valuatedMode = false;
     private boolean draggNode = false;
     private Node draggedNode = null;
 
@@ -69,6 +68,11 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 	public AlgorithmRunner getARun()
 	{
 		return algoRun;
+	}
+
+	public void setValuated(boolean state)
+	{
+		valuatedMode = state;
 	}
 
     public void setEditorMode(int mode)
@@ -283,10 +287,24 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
                             noLink = false;
                     if(noLink)
                     {
-                        linkOrigin.addLink(linkDest);
+						if(valuatedMode)
+						{
+                        	linkOrigin.addLink(linkDest,true);
+							
+							if(!orientedMode)
+	                            linkDest.addLink(linkOrigin, true); //Add the reverse link.
+						}
 
-                        if(!orientedMode)
-                            linkDest.addLink(linkOrigin); //Add the reverse link.
+						else
+						{
+							linkOrigin.addLink(linkDest,false);
+			
+							if(!orientedMode)
+                            	linkDest.addLink(linkOrigin, false); //Add the reverse link.
+						}													
+
+                        
+							
                     }
 
                 }

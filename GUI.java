@@ -36,6 +36,7 @@ public class GUI extends JFrame
     //Creating the items displayed in Edit
     JMenuItem clear_ = new JMenuItem("Clear");
 	JMenuItem reset_ = new JMenuItem("Reset");
+	JCheckBox valuated_ = new JCheckBox("Valuated");
 
     //Creating the items displayed in Tools
     JMenuItem add_ = new JMenuItem("Add");
@@ -94,6 +95,8 @@ public class GUI extends JFrame
 
         edit.add(clear_);
 		edit.add(reset_);
+		edit.addSeparator();
+		edit.add(valuated_);
 		edit.add(speed_);
 
 		speed_.add(ufast_);
@@ -151,6 +154,9 @@ public class GUI extends JFrame
 		
 		reset_.setAccelerator(KeyStroke.getKeyStroke(
         KeyEvent.VK_R, KeyEvent.CTRL_MASK));
+
+		/*valuated_.setAccelerator(KeyStroke.getKeyStroke(
+        KeyEvent.VK_R, KeyEvent.CTRL_MASK + KeyEvent.SHIFT_MASK));*/
 			
 				//--Animation Speed Sub-Subsection--
 		/*plus_.setAccelerator(KeyStroke.getKeyStroke(
@@ -268,6 +274,21 @@ public class GUI extends JFrame
             temp = graph.getADisp();
 			temp.clearDisp();
         }        
+        });
+
+		
+        valuated_.addItemListener(new ItemListener() 
+				{
+
+		            public void itemStateChanged(ItemEvent e) 
+		{
+                if(e.getStateChange() == ItemEvent.SELECTED)
+					graph.setValuated(true);
+				
+				else if(e.getStateChange() == ItemEvent.SELECTED)
+					graph.setValuated(false);
+                    
+        }
         });
 	
 					//---ANIMATION SPEED SUBSECTION---

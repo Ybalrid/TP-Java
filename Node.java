@@ -44,10 +44,15 @@ public class Node extends JPanel
         g2.setColor(defaultColor);
 	}
     
-    public void addLink(Node dest)
-    {
+    public void addLink(Node dest, boolean valuated)
+    {		
         System.out.println("adding link");
-        LinkList.add(new Link (this, dest));
+		Link nLink = new Link(this, dest);
+        LinkList.add(nLink);
+		
+		if(valuated)
+			nLink.setValuated();
+
     }
 
 	// ----------------------- GETTERS AND SETTERS -------------------------------
