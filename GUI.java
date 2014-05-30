@@ -139,7 +139,7 @@ public class GUI extends JFrame
         KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 		
 		save_as_.setAccelerator(KeyStroke.getKeyStroke(
-        KeyEvent.VK_N, KeyEvent.CTRL_MASK + KeyEvent.SHIFT_MASK));
+        KeyEvent.VK_S, KeyEvent.CTRL_MASK + KeyEvent.SHIFT_MASK));
 
 		quit_.setAccelerator(KeyStroke.getKeyStroke(
         KeyEvent.VK_Q, KeyEvent.CTRL_MASK + KeyEvent.SHIFT_MASK));

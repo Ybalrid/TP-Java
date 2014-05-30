@@ -99,6 +99,7 @@ public class AlgorithmDisplayer extends Thread
                 nextNode.setColor(Color.GREEN);
                 if(lastNode != null)
                 {
+                    if(lastNode != nextNode)
                     lastNode.setColor(Color.RED);
                     boolean Oriented = false;
                     for(int i = 0; i < lastNode.getLinks().size(); i++)
