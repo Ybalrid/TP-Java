@@ -17,6 +17,8 @@ public class AlgorithmDisplayer extends Thread
     private GraphEditor parent = null;
     private boolean animate = false;
     private Queue<Node> displayQueue = new LinkedList<Node>();
+    
+    private Node lastNode = null;
 
 	public AlgorithmDisplayer(ArrayList<Node> NodeList, GraphEditor p)
 	{
@@ -81,6 +83,26 @@ public class AlgorithmDisplayer extends Thread
             {
                 Node nextNode = displayQueue.remove();
                 nextNode.setColor(Color.RED);
+                if(lastNode != null)
+                {
+                    boolean Oriented = false;
+                    for(int i = 0; i < lastNode.getLinks().size(); i++)
+                    {
+                        if(lastNode.getLinks().get(i).to() == nextNode)
+                            lastNode.getLinks().get(i).setColor(Color.RED);
+                        Oriented = lastNode.getLinks().get(i).isOriented();
+                    }
+
+                    if(!Oriented)
+                    for(int i = 0; i < nextNode.getLinks().size(); i++)
+                    {
+                        if(nextNode.getLinks().get(i).to() == lastNode)
+                            nextNode.getLinks().get(i).setColor(Color.RED);
+                    }
+                        
+                }
+
+                lastNode = nextNode;
             }
 
         }
@@ -98,7 +120,12 @@ public class AlgorithmDisplayer extends Thread
     {
         if(animate) return;
         for(int i = 0; i < NodeCp.size(); i++)
+        {
             NodeCp.get(i).setColor(Color.BLACK);
+            for(int j = 0; j < NodeCp.get(i).getLinks().size(); j++)
+                NodeCp.get(i).getLinks().get(j).setColor(Color.BLACK);
+        }
+        lastNode = null;
     }
 }
 
