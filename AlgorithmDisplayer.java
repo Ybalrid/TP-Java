@@ -12,7 +12,7 @@ import java.io.*;
 public class AlgorithmDisplayer extends Thread
 {
 	private ArrayList<Node> NodeCp = null;
-    private long delay = 200; //ms
+    private long delay = 400; //ms
     private boolean state = false;
     private GraphEditor parent = null;
     private boolean animate = false;

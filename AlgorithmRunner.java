@@ -28,17 +28,71 @@ public class AlgorithmRunner
 		trace[startNode.getID()] = true;
 		algoDisp.addToDisplayQueue(startNode);	
 		
+		ArrayList<Link> tmpLink = startNode.getLinks();
+
+		for(Link linkIterator : tmpLink)
+		{
+			DepthFirst(trace, linkIterator.to());
+		}
+	
 		//Launch display when every Nodes have been visited.
 		algoDisp.show();
 	}
 
 	public void DepthFirst(boolean trace[], Node startNode)
 	{
+		if(trace[startNode.getID()])
+			return;
+
+		trace[startNode.getID()] = true;
+
+		algoDisp.addToDisplayQueue(startNode);
+
+		ArrayList<Link> tmpLink = startNode.getLinks();
+
+		for(Link linkIterator : tmpLink)
+		{
+			DepthFirst(trace, linkIterator.to());
+		}
 		
 	}
 
-	public void BreadthFirst()
+	public void BreadthFirst(Node startNode)
 	{
 		boolean trace[] = new boolean[nodes.size()];
+
+		Node current = null;
+		Node next = null;				
+		
+		Queue<Node> nodeQueue = new LinkedList<Node>();
+		ArrayList<Link> tmpLink = startNode.getLinks();		
+
+		nodeQueue.add(startNode);
+		System.out.println("Debug 1");
+		
+		while(nodeQueue.peek() != null)
+		{
+			current = nodeQueue.remove();
+			trace[current.getID()] = true;
+			algoDisp.addToDisplayQueue(current);
+			System.out.println("Debug 2");
+
+			for(Link linkIterator : tmpLink)
+			{
+				next = linkIterator.to();
+				System.out.println("Debug 3");
+
+					if(trace[next.getID()] == false)
+					{
+						System.out.println("Debug 4");
+						nodeQueue.add(next);
+						trace[next.getID()] = true;
+					}
+			}
+		}
+
+		algoDisp.show();
 	}
+
+	
 }

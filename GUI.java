@@ -242,6 +242,15 @@ public class GUI extends JFrame
 			graph.setAlgoMode(1);
         }        
         });
+		
+		breadth_.addActionListener(new ActionListener()
+                {
+                    public void actionPerformed(ActionEvent arg0) 
+        {			
+            setCursor(algoCurs);
+			graph.setAlgoMode(2);
+        }        
+        });
 
 	 // ----------------------- HELP SECTION -------------------------------
 

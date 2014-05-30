@@ -240,6 +240,12 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 				if(getDistance(closestNode, x, y) <= 10)
 					algoRun.DepthFirst_(closestNode);
 			}
+
+			else if(algoMode == 2)
+			{
+				if(getDistance(closestNode, x, y) <= 10)
+					algoRun.BreadthFirst(closestNode);
+			}
 		}
     }
 
