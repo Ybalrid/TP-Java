@@ -101,6 +101,13 @@ public class AlgorithmRunner
 
 	public int dijkstra(Node startNode)
 	{
+		int distance[] = new int[nodes.size()];
+
+		for(int i = 0; i < nodes.size(); i++)
+		{
+			distance[i] = 1000000000; //Set base distance to 1.000.000.000 (1 bilion) to aproximate infinite distance.
+		}						
+
 		return 0;
 	}	
 }
