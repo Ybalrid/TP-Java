@@ -162,7 +162,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
 
             //calculate distance
             distance = getDistance(myNode,x,y);
-            System.out.println("distance : " + distance);
+            //System.out.println("distance : " + distance);
 
             if(distance < reference)
             {
@@ -341,7 +341,7 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
         int x = e.getX();
         int y = e.getY();
 
-        System.out.println("mouseDragged");
+        //System.out.println("mouseDragged");
 
         if(editorMode == 1 && algoMode == 0)
         {
