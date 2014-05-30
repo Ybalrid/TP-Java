@@ -26,6 +26,11 @@ public class AlgorithmDisplayer extends Thread
         parent = p;
 	}
 
+    public void setNodeList(ArrayList<Node> NodeList)
+    {
+        NodeCp = NodeList;
+    }
+
     public void addToDisplayQueue(Node n)
     {
         if(!animate)

@@ -423,6 +423,8 @@ public class GraphEditor extends JPanel implements MouseListener, MouseMotionLis
     {
         newMenuAction();
         NodeList = Fm.readListFromFile(path);
+        algoDisp.setNodeList(NodeList);
+        algoRun.setNodeList(NodeList);
         reIndex();
         repaint();
 

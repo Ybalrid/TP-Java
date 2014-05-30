@@ -21,6 +21,11 @@ public class AlgorithmRunner
         algoDisp = ad;
     }
 
+    public void setNodeList(ArrayList<Node> NodeList)
+    {
+        nodes = NodeList;
+    }
+
 	public void DepthFirst_(Node startNode)
 	{
 		boolean trace[] = new boolean[nodes.size()];
